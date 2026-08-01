@@ -98,47 +98,14 @@
   @media (prefers-reduced-motion: reduce) { .sprite { animation: none; } }
   :root:has(#theme-toggle:checked) .sprite { opacity: 0.22; }
 
-  /* ---- meta bar ---- */
-  .meta-bar {
-    position: sticky; top: 0; z-index: 20;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 20px;
-    background: var(--bar-bg);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--border);
-    font-family: var(--label-font);
-    font-size: 11px;
-    letter-spacing: var(--label-tracking);
-    text-transform: uppercase;
-  }
-  .meta-bar .tag { color: var(--accent-2); }
-  .page-switch { display: flex; gap: 0; }
-  .page-switch input { position: absolute; opacity: 0; pointer-events: none; }
-  .page-switch label {
-    padding: 7px 16px;
-    color: var(--ink-soft);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    font-weight: 700;
-    transition: background .15s ease, color .15s ease;
-  }
-  .page-switch label:not(:first-of-type) { border-left: none; }
-  .page-switch label:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent); }
-  .app:has(#page-home:checked) label[for="page-home"],
-  .app:has(#page-resume:checked) label[for="page-resume"],
-  .app:has(#page-video:checked) label[for="page-video"],
-  .app:has(#page-photo:checked) label[for="page-photo"],
-  .app:has(#page-graphic:checked) label[for="page-graphic"],
-  .app:has(#page-about:checked) label[for="page-about"] {
-    color: var(--ink); background: color-mix(in srgb, var(--ink) 8%, transparent); font-weight: 800;
-  }
-  .meta-right { display: flex; align-items: center; gap: 14px; }
-  .theme-switch-input { position: absolute; opacity: 0; pointer-events: none; }
+  /* ---- hidden routing inputs ---- */
+  .page-inputs { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden; }
   .theme-switch {
-    padding: 7px 12px; border: 1px solid var(--border); cursor: pointer;
-    color: var(--ink-soft); font-weight: 700;
+    padding: 6px 10px; border: 1px solid var(--border); cursor: pointer;
+    color: var(--ink-soft); font-weight: 700; border-radius: 20px;
+    transition: color .15s ease, border-color .15s ease;
   }
-  .theme-switch:hover { color: var(--accent); border-color: var(--accent); }
+  .theme-switch:hover { color: var(--ink); border-color: var(--ink); }
 
   .app { position: relative; z-index: 1; }
   .page-home, .page-resume, .page-video, .page-photo, .page-graphic, .page-about { display: none; }
@@ -235,6 +202,7 @@
   .nav-links label:hover, .nav-links label:focus-visible {
     color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent);
   }
+  .app:has(#page-home:checked) .nav-links label[for="page-home"],
   .app:has(#page-video:checked) .nav-links label[for="page-video"],
   .app:has(#page-photo:checked) .nav-links label[for="page-photo"],
   .app:has(#page-graphic:checked) .nav-links label[for="page-graphic"],
@@ -477,7 +445,6 @@
     .media-head { padding: 48px 24px 32px; }
     details.role .role-body { padding-left: 22px; }
     footer.frame-footer { flex-direction: column; gap: 6px; }
-    .meta-bar { flex-direction: column; gap: 8px; align-items: flex-start; }
   }
 </style>
 
@@ -492,26 +459,20 @@
 </div>
 
 <div class="app">
-  <div class="meta-bar">
-    <span class="tag">◆ Design preview, not final fidelity</span>
-    <div class="meta-right">
-      <input type="checkbox" id="theme-toggle" class="theme-switch-input" checked>
-      <label for="theme-toggle" class="theme-switch">🌙 / ☀</label>
-      <div class="page-switch">
-        <input type="radio" name="page" id="page-home" checked><label for="page-home">Home</label>
-        <input type="radio" name="page" id="page-video"><label for="page-video">Video</label>
-        <input type="radio" name="page" id="page-photo"><label for="page-photo">Photo</label>
-        <input type="radio" name="page" id="page-graphic"><label for="page-graphic">Graphic</label>
-        <input type="radio" name="page" id="page-resume"><label for="page-resume">Resume</label>
-        <input type="radio" name="page" id="page-about"><label for="page-about">About</label>
-      </div>
-    </div>
+  <div class="page-inputs" aria-hidden="true">
+    <input type="checkbox" id="theme-toggle" class="theme-switch-input" checked>
+    <input type="radio" name="page" id="page-home" checked>
+    <input type="radio" name="page" id="page-video">
+    <input type="radio" name="page" id="page-photo">
+    <input type="radio" name="page" id="page-graphic">
+    <input type="radio" name="page" id="page-resume">
+    <input type="radio" name="page" id="page-about">
   </div>
 
   <div class="page-home">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
 
     <section class="hero">
@@ -617,8 +578,8 @@
 
   <div class="page-video">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Motion &amp; Video</p>
@@ -669,8 +630,8 @@
 
   <div class="page-photo">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Photography</p>
@@ -695,8 +656,8 @@
 
   <div class="page-graphic">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Graphic Design</p>
@@ -720,8 +681,8 @@
 
   <div class="page-about">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">About</p>
@@ -765,8 +726,8 @@
 
   <div class="page-resume">
     <nav class="site-nav">
-      <span class="logo">MS</span>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
 
     <div class="resume-head">
