@@ -108,13 +108,14 @@
   .theme-switch:hover { color: var(--ink); border-color: var(--ink); }
 
   .app { position: relative; z-index: 1; }
-  .page-home, .page-resume, .page-video, .page-photo, .page-graphic, .page-about { display: none; }
+  .page-home, .page-resume, .page-video, .page-photo, .page-graphic, .page-about, .page-ux { display: none; }
   .app:has(#page-home:checked) .page-home { display: block; }
   .app:has(#page-resume:checked) .page-resume { display: block; }
   .app:has(#page-video:checked) .page-video { display: block; }
   .app:has(#page-photo:checked) .page-photo { display: block; }
   .app:has(#page-graphic:checked) .page-graphic { display: block; }
   .app:has(#page-about:checked) .page-about { display: block; }
+  .app:has(#page-ux:checked) .page-ux { display: block; }
 
   /* media gallery pages */
   .media-head { padding: 64px 56px 40px; max-width: 1180px; margin: 0 auto; }
@@ -203,6 +204,7 @@
     color: var(--ink); background: color-mix(in srgb, var(--ink) 6%, transparent);
   }
   .app:has(#page-home:checked) .nav-links label[for="page-home"],
+  .app:has(#page-ux:checked) .nav-links label[for="page-ux"],
   .app:has(#page-video:checked) .nav-links label[for="page-video"],
   .app:has(#page-photo:checked) .nav-links label[for="page-photo"],
   .app:has(#page-graphic:checked) .nav-links label[for="page-graphic"],
@@ -368,6 +370,7 @@
   .quote-strip .quote-card blockquote { font-size: 13.5px; }
 
   .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
+  .ux-grid { display: flex; flex-direction: column; gap: 20px; }
   .case-study-grid .card {
     display: grid; grid-template-rows: subgrid; grid-row: span 4; align-content: start; row-gap: 0;
   }
@@ -416,6 +419,7 @@
   details.role .role-body { padding: 0 22px 22px 70px; }
   details.role .role-body ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; line-height: 1.65; }
 
+
   /* education */
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .edu-card { background: var(--surface); border: 1px solid var(--border); padding: 22px 24px; }
@@ -462,6 +466,7 @@
   <div class="page-inputs" aria-hidden="true">
     <input type="checkbox" id="theme-toggle" class="theme-switch-input" checked>
     <input type="radio" name="page" id="page-home" checked>
+    <input type="radio" name="page" id="page-ux">
     <input type="radio" name="page" id="page-video">
     <input type="radio" name="page" id="page-photo">
     <input type="radio" name="page" id="page-graphic">
@@ -472,7 +477,7 @@
   <div class="page-home">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
 
     <section class="hero">
@@ -576,10 +581,55 @@
     </footer>
   </div>
 
+  <div class="page-ux">
+    <nav class="site-nav">
+      <label for="page-home" class="logo">MS</label>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+    </nav>
+    <div class="media-head">
+      <p class="kicker">UX/UI Design</p>
+      <h2>UX Case Studies</h2>
+      <p>Selected projects from research through to shipped features, leaning minimal and user-focused.</p>
+    </div>
+    <section class="section" style="padding-top:0;">
+      <div class="ux-grid">
+        <div class="card pixel reveal">
+          <div class="eyebrow-row">
+            <span class="tag-plain">UX/UI Design · User Research</span>
+            <span class="badge">PIP25C2 Runner-Up</span>
+          </div>
+          <h4>Canopy 🌿</h4>
+          <p>A digital platform helping university students and tutors connect safely outside the classroom. Personal "trees" spark empathy, low-pressure booking removes friction, and an AI meeting assistant summarises key points, built with a team of six over nine weeks.</p>
+          <div class="chip-row"><span class="chip">Figma</span><span class="chip">FigJam</span><span class="chip">Notion</span></div>
+        </div>
+        <div class="card pixel reveal">
+          <div class="eyebrow-row">
+            <span class="tag-plain">Product Design · Cross-fn Collaboration</span>
+          </div>
+          <h4>Scheduling Features</h4>
+          <p>Configurable worker scheduling for complex shift patterns on a US/UK recruiting platform, across desktop and app. Mapped edge cases with engineering, used Claude to stress-test ideas, and balanced labour compliance without adding friction for clients or talent.</p>
+          <div class="chip-row"><span class="chip">Swipejobs · 2026</span><span class="chip">Figma</span><span class="chip">Jira</span><span class="chip">Claude</span></div>
+        </div>
+        <div class="card pixel reveal">
+          <div class="eyebrow-row">
+            <span class="tag-plain">UI Design</span>
+          </div>
+          <h4>Friends n Family</h4>
+          <p>A quiet-luxury brand site for a fund management business, designed independently and refined through direct founder feedback. Pivoted mid-project to a black and white minimalist direction that better matched the brand's philosophy.</p>
+          <div class="chip-row"><span class="chip">Independent · 2025</span><span class="chip">Figma</span><span class="chip">Notion</span></div>
+        </div>
+      </div>
+    </section>
+    <footer class="frame-footer">
+      <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
+      <span>michellesunito@gmail.com</span>
+    </footer>
+  </div>
+
   <div class="page-video">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Motion &amp; Video</p>
@@ -631,7 +681,7 @@
   <div class="page-photo">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Photography</p>
@@ -657,7 +707,7 @@
   <div class="page-graphic">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Graphic Design</p>
@@ -682,7 +732,7 @@
   <div class="page-about">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">About</p>
@@ -727,7 +777,7 @@
   <div class="page-resume">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <ul class="nav-links"><li>UX</li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch">🌙 / ☀</label></li></ul>
     </nav>
 
     <div class="resume-head">
@@ -801,43 +851,6 @@
 
       <details class="role">
         <summary>
-          <span class="role-logo" style="background:#C8102E;color:#fff;border-color:#C8102E;">W</span>
-          <span class="role-info">
-            <span class="role-title">Control Room Operator</span>
-            <span class="role-meta">Wilson Parking Australia · Mar 2024 – May 2025</span>
-          </span>
-          <span class="marker">▸</span>
-        </summary>
-        <div class="role-body">
-          <ul>
-            <li>Managed parking gates at the airport, assisting customers with faulty tickets, prebookings, and staff inquiries.</li>
-            <li>Operated in a high-paced environment, ensuring smooth parking operations and customer satisfaction.</li>
-          </ul>
-          <div class="chip-row"><span class="chip">Communication</span><span class="chip">Customer Service</span></div>
-        </div>
-      </details>
-
-      <details class="role">
-        <summary>
-          <span class="role-logo" style="background:#22A559;color:#fff;border-color:#22A559;">CC</span>
-          <span class="role-info">
-            <span class="role-title">Teaching Assistant</span>
-            <span class="role-meta">Code Camp · Sep 2022 – Nov 2024</span>
-          </span>
-          <span class="marker">▸</span>
-        </summary>
-        <div class="role-body">
-          <ul>
-            <li>Assisted in teaching primary school students with day camp courses (e.g. Roblox, Animation, and YouTube content creation).</li>
-            <li>Ensured classroom setup and student safety, fostering a positive learning environment.</li>
-            <li>Collaborated with teachers to provide engaging and educational experiences for students.</li>
-          </ul>
-          <div class="chip-row"><span class="chip">Teaching</span><span class="chip">Working with Children</span></div>
-        </div>
-      </details>
-
-      <details class="role">
-        <summary>
           <span class="role-logo"><img src="data:image/png;base64,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" alt=""></span>
           <span class="role-info">
             <span class="role-title">Media Director</span>
@@ -895,25 +908,6 @@
 
       <details class="role">
         <summary>
-          <span class="role-logo" style="background:#F26522;color:#fff;border-color:#F26522;">C</span>
-          <span class="role-info">
-            <span class="role-title">Mathematics Tutor</span>
-            <span class="role-meta">Cluey Learning · Apr 2021 – Sep 2023</span>
-          </span>
-          <span class="marker">▸</span>
-        </summary>
-        <div class="role-body">
-          <ul>
-            <li>Tutored high school students in mathematics from Year 7 to Year 12, providing personalised support and feedback to help them grasp difficult concepts.</li>
-            <li>Utilised an online platform to conduct tutoring sessions, ensuring accessibility and flexibility for students and parents.</li>
-            <li>Wrote detailed reports at the end of each session to communicate progress and areas of improvement to parents, fostering a collaborative learning environment.</li>
-          </ul>
-          <div class="chip-row"><span class="chip">Online Tutoring</span><span class="chip">Working with Children</span></div>
-        </div>
-      </details>
-
-      <details class="role">
-        <summary>
           <span class="role-logo"><img src="data:image/png;base64,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" alt=""></span>
           <span class="role-info">
             <span class="role-title">Media Subcommittee Member</span>
@@ -928,44 +922,6 @@
             <li>Contributed to the growth of the society's online presence and engagement through creative content creation.</li>
           </ul>
           <div class="chip-row"><span class="chip">Video Editing</span><span class="chip">Creative Content Creation</span></div>
-        </div>
-      </details>
-
-      <details class="role">
-        <summary>
-          <span class="role-logo"><img src="data:image/png;base64,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" alt=""></span>
-          <span class="role-info">
-            <span class="role-title">Peer Mentor &amp; Media Subcommittee Member</span>
-            <span class="role-meta">UNSW CSESoc · Mar 2021 – May 2022</span>
-          </span>
-          <span class="marker">▸</span>
-        </summary>
-        <div class="role-body">
-          <ul>
-            <li>Mentored first-year computer science students in CSESoc, helping them navigate university life.</li>
-            <li>Collaborated with a team of 10 in the media subcommittee, implementing feedback for improvement and creating engaging content like video podcasts.</li>
-            <li>Developed strong communication and teamwork skills working on media projects for the society.</li>
-          </ul>
-          <div class="chip-row"><span class="chip">Peer Mentoring</span><span class="chip">Creative Content Creation</span></div>
-        </div>
-      </details>
-
-      <details class="role">
-        <summary>
-          <span class="role-logo"><img src="data:image/png;base64,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" alt=""></span>
-          <span class="role-info">
-            <span class="role-title">Philanthropy Volunteer</span>
-            <span class="role-meta">Arc - UNSW Student Life · Mar 2021 – Dec 2021</span>
-          </span>
-          <span class="marker">▸</span>
-        </summary>
-        <div class="role-body">
-          <ul>
-            <li>Organised fundraising events like a Bunnings charity barbeque and Funathon to raise money for Sydney Children's Hospital.</li>
-            <li>Spread awareness of philanthropy and its importance in the community through various initiatives.</li>
-            <li>Collaborated with team members to achieve fundraising goals and make a positive impact.</li>
-          </ul>
-          <div class="chip-row"><span class="chip">Volunteering</span><span class="chip">Teamwork</span></div>
         </div>
       </details>
     </section>
