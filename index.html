@@ -30,6 +30,8 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body {
     background:
       repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px),
@@ -268,7 +270,12 @@
 
   .hobby-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
   .hobby-video-frame { position: relative; aspect-ratio: 9/16; background: var(--surface); border: 1px solid var(--border); overflow: hidden; display: flex; align-items: flex-end; }
-  .hobby-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .hobby-video-frame video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .4s ease;
+  }
+  .hobby-video-frame:hover video { transform: scale(1.08); }
+  @media (prefers-reduced-motion: reduce) { .hobby-video-frame video { transition: none; } }
   .hobby-label {
     position: absolute; bottom: 12px; left: 12px; z-index: 2; pointer-events: none;
     font-family: var(--label-font); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -280,6 +287,7 @@
     font-family: var(--label-font); font-size: 12px; letter-spacing: var(--label-tracking); text-transform: uppercase;
     color: var(--ink); opacity: 0; display: flex; align-items: center; gap: 8px;
     animation: hero-in .6s ease .8s forwards, blink 1.8s steps(2, jump-none) infinite 1.4s;
+    text-decoration: none; cursor: pointer; background: none; border: none; padding: 0;
   }
   @keyframes blink { 50% { opacity: 0.35; } }
   @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; opacity: 1; } }
@@ -366,9 +374,6 @@
   }
   .path-tile:hover .path-arrow { opacity: 1; transform: translateY(0); color: var(--accent); }
 
-  .quote-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .quote-strip .quote-card blockquote { font-size: 13.5px; }
-
   .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
   .ux-grid { display: flex; flex-direction: column; gap: 20px; }
   .case-study-grid .card {
@@ -428,11 +433,20 @@
   .edu-card p.edu-detail { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin: 0; }
   details.role .role-body .chip-row { margin-top: 14px; }
 
-  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .quote-card { background: var(--surface); border: 1px solid var(--border); padding: 24px 22px; }
-  .quote-card blockquote { margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: var(--ink); font-style: italic; }
-  .quote-card cite { font-family: var(--label-font); font-size: 11px; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--accent); font-style: normal; }
+  .quote-carousel { max-width: 640px; margin: 0 auto; }
+  .quote-track { display: grid; }
+  .quote-slide {
+    grid-area: 1 / 1; background: var(--surface); border: 1px solid var(--border); padding: 32px 30px;
+    text-align: center; opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease;
+    pointer-events: none;
+  }
+  .quote-slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
+  .quote-slide blockquote { margin: 0 0 16px; font-size: 15px; line-height: 1.65; color: var(--ink); font-style: italic; }
+  .quote-slide cite { font-family: var(--label-font); font-size: 11px; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--accent); font-style: normal; }
   .placeholder-flag { font-family: var(--label-font); font-size: 10px; letter-spacing: 0.05em; color: var(--accent-2); text-transform: uppercase; margin-top: 8px; }
+  .quote-dots { display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
+  .quote-dot { width: 7px; height: 7px; padding: 0; border: none; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .2s ease, transform .2s ease; }
+  .quote-dot.is-active { background: var(--accent); transform: scale(1.35); }
 
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -444,7 +458,7 @@
     .section, .resume-head, footer.frame-footer { padding-left: 24px; padding-right: 24px; }
     nav.site-nav { padding: 20px 24px; flex-direction: column; gap: 14px; }
     .nav-links { flex-wrap: wrap; gap: 12px 16px; }
-    .loadout, .quotes, .case-study-grid, .edu-grid, .video-grid, .banner-grid { grid-template-columns: 1fr; }
+    .loadout, .case-study-grid, .edu-grid, .video-grid, .banner-grid { grid-template-columns: 1fr; }
     .photo-grid { grid-template-columns: repeat(2, 1fr); }
     .media-head { padding: 48px 24px 32px; }
     details.role .role-body { padding-left: 22px; }
@@ -498,11 +512,11 @@
         </div>
       </label>
       <div class="hero-scroll">
-        <p class="scroll-cue">▾ scroll to continue</p>
+        <a href="#home-loadout" class="scroll-cue">▾ scroll to continue</a>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="home-loadout">
       <div class="section-head"><span class="index">01</span><h3>Loadout</h3><span class="rule"></span></div>
       <div class="loadout">
         <div class="loadout-group reveal">
@@ -561,16 +575,27 @@
 
     <section class="section">
       <div class="section-head"><span class="index">04</span><h3>What People Say</h3><span class="rule"></span></div>
-      <div class="quotes quote-strip">
-        <div class="quote-card reveal">
-          <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
-          <cite>Placeholder · Role, Team</cite>
-          <p class="placeholder-flag">⚠ Needs a real quote</p>
+      <div class="quote-carousel reveal">
+        <div class="quote-track">
+          <div class="quote-slide is-active">
+            <blockquote>"She has a natural creative eye, understands how to communicate through visual storytelling, and consistently delivers content with professionalism. Beyond her technical skills, Michelle brings a positive attitude, humility, and genuine care for the people she works with."</blockquote>
+            <cite>Iwan Sunito · Group CEO, One Global Capital</cite>
+          </div>
+          <div class="quote-slide">
+            <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
+            <cite>Placeholder · Role, Team</cite>
+            <p class="placeholder-flag">⚠ Needs a real quote</p>
+          </div>
+          <div class="quote-slide">
+            <blockquote>"Placeholder quote: e.g. how you run research or handle feedback."</blockquote>
+            <cite>Placeholder · Role, Team</cite>
+            <p class="placeholder-flag">⚠ Needs a real quote</p>
+          </div>
         </div>
-        <div class="quote-card reveal">
-          <blockquote>"Placeholder quote: e.g. how you run research or handle feedback."</blockquote>
-          <cite>Placeholder · Role, Team</cite>
-          <p class="placeholder-flag">⚠ Needs a real quote</p>
+        <div class="quote-dots">
+          <button type="button" class="quote-dot is-active" data-index="0" aria-label="Quote 1"></button>
+          <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
+          <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
         </div>
       </div>
     </section>
@@ -744,26 +769,24 @@
         <div class="about-bio">
           <p>Hi, I'm Michelle, a multimedia designer with expertise in UX/UI, videography, graphic design, and photography. With years of experience using Adobe Creative Suite and Figma, I'm eager to join a creative team where I can contribute my skills and help bring compelling projects to life.</p>
           <p>I believe the best work happens through strong collaboration and environments that encourage bold creative thinking.</p>
-          <h4>Outside of Work</h4>
-          <p class="about-quote">Outside of work, I'm either online gaming with my crew (Riot Games has my heart), filming K-pop dance covers, or enjoying way too much good food with even better company.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><span class="index">01</span><h3>Hobbies, Muted</h3><span class="rule"></span></div>
-      <p class="media-placeholder-note">⚠ Embedded via Google Drive, click play, not autoplay-muted like a native video</p>
+      <div class="section-head"><span class="index">01</span><h3>Outside of Work</h3><span class="rule"></span></div>
+      <p class="about-quote">Outside of work, I'm either online gaming with my crew (Riot Games has my heart), filming K-pop dance covers, or enjoying way too much good food with even better company.</p>
       <div class="hobby-grid">
         <div class="hobby-video-frame pixel reveal">
-          <iframe src="https://drive.google.com/file/d/1K5NfmMAgkx95sP5y8jgGxTBK0267cQVG/preview" allow="autoplay"></iframe>
+          <video src="videos/dancing.mp4" autoplay muted loop playsinline></video>
           <span class="hobby-label">dancing</span>
         </div>
         <div class="hobby-video-frame pixel reveal">
-          <iframe src="https://drive.google.com/file/d/1_Fq5v7eV2GrHULc_Ag8_7TucSe_17TD0/preview" allow="autoplay"></iframe>
+          <video src="videos/gaming.mp4" autoplay muted loop playsinline></video>
           <span class="hobby-label">gaming</span>
         </div>
         <div class="hobby-video-frame pixel reveal">
-          <iframe src="https://drive.google.com/file/d/11YoAqpAuYjrv61WqjwYjTbX1oxExM-iI/preview" allow="autoplay"></iframe>
+          <video src="videos/food.mp4" autoplay muted loop playsinline></video>
           <span class="hobby-label">food</span>
         </div>
       </div>
@@ -975,21 +998,27 @@
 
     <section class="section">
       <div class="section-head"><span class="index">04</span><h3>What People Say</h3><span class="rule"></span></div>
-      <div class="quotes">
-        <div class="quote-card">
-          <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
-          <cite>Placeholder · Role, Team</cite>
-          <p class="placeholder-flag">⚠ Needs a real quote</p>
+      <div class="quote-carousel reveal">
+        <div class="quote-track">
+          <div class="quote-slide is-active">
+            <blockquote>"She has a natural creative eye, understands how to communicate through visual storytelling, and consistently delivers content with professionalism. Beyond her technical skills, Michelle brings a positive attitude, humility, and genuine care for the people she works with."</blockquote>
+            <cite>Iwan Sunito · Group CEO, One Global Capital</cite>
+          </div>
+          <div class="quote-slide">
+            <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
+            <cite>Placeholder · Role, Team</cite>
+            <p class="placeholder-flag">⚠ Needs a real quote</p>
+          </div>
+          <div class="quote-slide">
+            <blockquote>"Placeholder quote: could be from the Friends n Family founder, a PIP teammate, etc."</blockquote>
+            <cite>Placeholder · Role, Team</cite>
+            <p class="placeholder-flag">⚠ Needs a real quote</p>
+          </div>
         </div>
-        <div class="quote-card">
-          <blockquote>"Placeholder quote: e.g. something about how you run research or handle feedback."</blockquote>
-          <cite>Placeholder · Role, Team</cite>
-          <p class="placeholder-flag">⚠ Needs a real quote</p>
-        </div>
-        <div class="quote-card">
-          <blockquote>"Placeholder quote: could be from the Friends n Family founder, a PIP teammate, etc."</blockquote>
-          <cite>Placeholder · Role, Team</cite>
-          <p class="placeholder-flag">⚠ Needs a real quote</p>
+        <div class="quote-dots">
+          <button type="button" class="quote-dot is-active" data-index="0" aria-label="Quote 1"></button>
+          <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
+          <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
         </div>
       </div>
     </section>
@@ -1040,6 +1069,30 @@
     if (source && target) target.src = source.src;
   })();
 
+  document.querySelectorAll('.quote-carousel').forEach(function (carousel) {
+    var slides = carousel.querySelectorAll('.quote-slide');
+    var dots = carousel.querySelectorAll('.quote-dot');
+    var current = 0;
+    var timer;
+    function show(index) {
+      current = index;
+      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === current); });
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+    }
+    function next() { show((current + 1) % slides.length); }
+    function start() { if (slides.length > 1) timer = setInterval(next, 5500); }
+    function stop() { clearInterval(timer); }
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        show(parseInt(dot.dataset.index, 10));
+        stop(); start();
+      });
+    });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+    start();
+  });
+
   var els = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -1077,7 +1130,7 @@
   }
 
   var cursorEl = document.getElementById('game-cursor');
-  var hoverSelector = 'a, label, summary, .path-tile, .tag, .theme-switch, .banner-tile, .photo-tile, .lightbox-close';
+  var hoverSelector = 'a, label, summary, .path-tile, .tag, .theme-switch, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame';
   window.addEventListener('mousemove', function (e) {
     cursorEl.style.display = 'block';
     cursorEl.style.left = e.clientX + 'px';
