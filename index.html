@@ -164,11 +164,11 @@
   }
   .case-problem-cta:hover { transform: translateY(-2px); }
 
-  .case-highlight-wrap { max-width: 1180px; margin: 0 auto 32px; padding: 0 56px; }
-  .case-highlight { border-radius: 24px; padding: 40px 48px; display: flex; gap: 24px; align-items: flex-start; }
-  .case-highlight .hl-icon { font-size: 34px; line-height: 1; flex-shrink: 0; }
-  .case-highlight h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 22px; margin: 0 0 14px; }
-  .case-highlight p { font-size: 16px; line-height: 1.75; margin: 0; max-width: 62ch; }
+  .case-highlight-row { max-width: 1180px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .case-highlight { border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .case-highlight .hl-icon { font-size: 24px; line-height: 1; }
+  .case-highlight h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; margin: 2px 0 0; }
+  .case-highlight p { font-size: 13.5px; line-height: 1.55; margin: 0; }
   .case-highlight p strong { font-weight: 700; }
   .case-highlight--lavender { background: #E8E4F5; }
   .case-highlight--lavender h3 { color: #2E2A4A; }
@@ -182,7 +182,7 @@
   .case-highlight--peach h3 { color: #5A2E1C; }
   .case-highlight--peach p { color: #7C4830; }
   .case-highlight--peach p strong { color: #472315; }
-  @media (max-width: 600px) { .case-highlight { flex-direction: column; padding: 32px 28px; } }
+  @media (max-width: 760px) { .case-highlight-row { grid-template-columns: 1fr; padding: 0 24px; } }
 
   .case-section { max-width: 860px; margin: 0 auto; padding: 0 56px 56px; }
   .case-section h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0 0 16px; }
@@ -222,7 +222,7 @@
   .case-team-photo img { width: 100%; height: auto; display: block; border-radius: 12px; }
   .case-team-caption { max-width: 1180px; margin: 0 auto 60px; padding: 0 56px; color: var(--ink-soft); font-size: 14px; text-align: center; }
   @media (max-width: 760px) {
-    .case-hero, .case-hero-img, .case-overview, .case-problem-wrap, .case-highlight-wrap, .case-section, .case-team-photo, .case-team-caption { padding-left: 24px; padding-right: 24px; }
+    .case-hero, .case-hero-img, .case-overview, .case-problem-wrap, .case-section, .case-team-photo, .case-team-caption { padding-left: 24px; padding-right: 24px; }
     .case-overview { grid-template-columns: 1fr; gap: 24px; }
     .case-problem { padding: 32px 28px; }
   }
@@ -707,9 +707,8 @@
             <cite>Iwan Sunito · Group CEO, One Global Capital</cite>
           </div>
           <div class="quote-slide">
-            <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
-            <cite>Placeholder · Role, Team</cite>
-            <p class="placeholder-flag">⚠ Needs a real quote</p>
+            <blockquote>"Michelle showed great initiative and brought good ideas to our video content. She's a strong team player who collaborates effectively with others."</blockquote>
+            <cite>Damien Cantelo · CEO &amp; Founder, Apollo Secure</cite>
           </div>
           <div class="quote-slide">
             <blockquote>"Placeholder quote: e.g. how you run research or handle feedback."</blockquote>
@@ -818,31 +817,21 @@
         <a href="#canopy-solution" class="case-problem-cta">See Solution</a>
       </div>
     </div>
-    <div class="case-highlight-wrap reveal" id="canopy-solution">
+    <div class="case-highlight-row reveal" id="canopy-solution">
       <div class="case-highlight case-highlight--lavender">
         <span class="hl-icon">🌳</span>
-        <div>
-          <h3>Personal Trees, Not Profiles</h3>
-          <p>Instead of a static bio, every user grows a <strong>"tree" shaped by a short personality quiz</strong>. It's a gentler way to introduce yourself and gives students and tutors <strong>something low-stakes to connect over</strong> before a single word is exchanged.</p>
-        </div>
+        <h3>Personal Trees, Not Profiles</h3>
+        <p>A short personality quiz grows your <strong>"tree"</strong>, a gentler, low-stakes way to introduce yourself before a word is exchanged.</p>
       </div>
-    </div>
-    <div class="case-highlight-wrap reveal">
       <div class="case-highlight case-highlight--sky">
         <span class="hl-icon">📅</span>
-        <div>
-          <h3>Booking, Without the Awkwardness</h3>
-          <p>The booking flow keeps decisions <strong>small and clear</strong>, pick a time, confirm a location, done. Removing friction here was less about speed and more about <strong>lowering the emotional barrier</strong> to actually pressing "book."</p>
-        </div>
+        <h3>Booking, Without the Awkwardness</h3>
+        <p>Pick a time, confirm a location, done. Small, clear decisions that <strong>lower the barrier</strong> to actually pressing "book."</p>
       </div>
-    </div>
-    <div class="case-highlight-wrap reveal">
       <div class="case-highlight case-highlight--peach">
         <span class="hl-icon">🤖</span>
-        <div>
-          <h3>An AI Assistant That Actually Listens</h3>
-          <p>After a meeting, Canopy's AI assistant <strong>summarises what was discussed</strong> into a few clear takeaways, so students can <strong>stay present in the conversation</strong> instead of scrambling to take notes.</p>
-        </div>
+        <h3>An AI Assistant That Listens</h3>
+        <p>After a meeting, the assistant <strong>summarises key takeaways</strong> so students can stay present instead of taking notes.</p>
       </div>
     </div>
     <div class="screen-carousel reveal">
@@ -1229,9 +1218,8 @@
             <cite>Iwan Sunito · Group CEO, One Global Capital</cite>
           </div>
           <div class="quote-slide">
-            <blockquote>"Placeholder quote: swap in something a teammate actually said about working with you."</blockquote>
-            <cite>Placeholder · Role, Team</cite>
-            <p class="placeholder-flag">⚠ Needs a real quote</p>
+            <blockquote>"Michelle showed great initiative and brought good ideas to our video content. She's a strong team player who collaborates effectively with others."</blockquote>
+            <cite>Damien Cantelo · CEO &amp; Founder, Apollo Secure</cite>
           </div>
           <div class="quote-slide">
             <blockquote>"Placeholder quote: could be from the Friends n Family founder, a PIP teammate, etc."</blockquote>
