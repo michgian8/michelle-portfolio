@@ -148,8 +148,8 @@
   .case-hero-img img { width: 100%; height: auto; display: block; }
 
   /* project overview, henry-style two column */
-  .case-overview { max-width: 1180px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; }
-  .case-overview h3 { grid-column: 1 / -1; font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0 0 16px; }
+  .case-overview { max-width: 1180px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: 0.85fr 1.15fr; row-gap: 16px; column-gap: 48px; }
+  .case-overview h3 { grid-column: 1 / -1; font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0; }
   .case-overview-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .case-overview-lists .ov-label { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); margin: 0 0 10px; }
   .case-overview-lists ul { list-style: none; margin: 0; padding: 0; }
@@ -327,7 +327,7 @@
 
   @media (max-width: 760px) {
     .case-hero, .case-hero-img, .case-overview, .case-problem-wrap, .case-section, .case-wide-head, .case-hmw, .case-team-photo, .case-team-caption, .case-video-embed, .case-video-row, .case-extra-links, .case-reviews { padding-left: 24px; padding-right: 24px; }
-    .case-overview { grid-template-columns: 1fr; gap: 24px; }
+    .case-overview { grid-template-columns: 1fr; row-gap: 16px; column-gap: 24px; }
     .case-problem { padding: 32px 28px; }
     .case-video-row { grid-template-columns: 1fr; }
   }
