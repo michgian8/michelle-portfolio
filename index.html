@@ -1,3 +1,14 @@
+<script type="text/javascript">
+  // Single Page Apps for GitHub Pages: restore the real path after the 404.html redirect
+  (function (l) {
+    if (l.search[1] === '/') {
+      var decoded = l.search.slice(1).split('&').map(function (s) {
+        return s.replace(/~and~/g, '&');
+      }).join('?');
+      window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+    }
+  })(window.location);
+</script>
 <title>Themed Framing · Full Preview</title>
 <style>
   :root {
@@ -1890,8 +1901,9 @@
 </div>
 
 <script>
-  // per-page URLs: sync the checked radio input with a URL hash so each page is a shareable/bookmarkable link
+  // per-page URLs: sync the checked radio input with the real URL path so each page is a shareable/bookmarkable link
   (function () {
+    var BASE = '/michelle-portfolio/';
     var slugToId = {
       'home': 'page-home', 'ux': 'page-ux', 'canopy': 'page-canopy', 'friends-n-family': 'page-friendsnfamily',
       'scheduling-features': 'page-schedulingfeatures', 'videography': 'page-video', 'never-have-i-ever': 'page-neverhaveiever',
@@ -1901,22 +1913,28 @@
     var idToSlug = {};
     Object.keys(slugToId).forEach(function (slug) { idToSlug[slugToId[slug]] = slug; });
 
-    function applyHash() {
-      var slug = decodeURIComponent(location.hash.replace('#', ''));
-      var id = slugToId[slug];
+    function currentSlug() {
+      var path = location.pathname;
+      path = path.indexOf(BASE) === 0 ? path.slice(BASE.length) : path.replace(/^\//, '');
+      path = path.replace(/\/$/, '');
+      return decodeURIComponent(path) || 'home';
+    }
+
+    function applyPath() {
+      var id = slugToId[currentSlug()];
       if (!id) return;
       var el = document.getElementById(id);
       if (el && !el.checked) el.checked = true;
     }
-    applyHash();
-    window.addEventListener('hashchange', applyHash);
+    applyPath();
+    window.addEventListener('popstate', applyPath);
 
     document.querySelectorAll('input[name="page"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
         var slug = idToSlug[radio.id];
         if (!slug) return;
-        var newHash = '#' + slug;
-        if (location.hash !== newHash) history.replaceState(null, '', newHash);
+        var newPath = slug === 'home' ? BASE : BASE + slug;
+        if (location.pathname !== newPath) history.replaceState(null, '', newPath);
       });
     });
   })();
