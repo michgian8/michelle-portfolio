@@ -2074,18 +2074,20 @@
     }
     function next() { show((current + 1) % slides.length); }
     function prev() { show((current - 1 + slides.length) % slides.length); }
-    function start() { if (slides.length > 1) timer = setInterval(next, 3500); }
     function stop() { clearInterval(timer); }
+    function start() { stop(); if (slides.length > 1) timer = setInterval(next, 5000); }
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () {
         show(parseInt(dot.dataset.index, 10));
-        stop(); start();
+        start();
       });
     });
     var prevBtn = carousel.querySelector('.quote-prev');
     var nextBtn = carousel.querySelector('.quote-next');
-    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); stop(); start(); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { next(); stop(); start(); });
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); start(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); start(); });
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
     start();
   });
 
