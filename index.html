@@ -88,7 +88,7 @@
     position: fixed; top: 0; left: 0; z-index: 998; pointer-events: none;
     color: var(--ink); animation: sprite-pop 650ms ease-out forwards;
   }
-  .cursor-sprite svg { display: block; shape-rendering: crispEdges; }
+  .cursor-sprite svg { display: block; }
   @keyframes sprite-pop {
     0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5) rotate(0deg); }
     55% { opacity: 0.9; transform: translate(calc(-50% + var(--tx) * 0.6), calc(-50% + var(--ty) * 0.6)) scale(1.1) rotate(70deg); }
@@ -96,20 +96,12 @@
   }
   @media (prefers-reduced-motion: reduce), (pointer: coarse) { .cursor-sprite { display: none; } }
 
-  .pixel {
-    clip-path: polygon(
-      0 var(--corner-cut), var(--corner-cut) var(--corner-cut), var(--corner-cut) 0,
-      calc(100% - var(--corner-cut)) 0, calc(100% - var(--corner-cut)) var(--corner-cut), 100% var(--corner-cut),
-      100% calc(100% - var(--corner-cut)), calc(100% - var(--corner-cut)) calc(100% - var(--corner-cut)), calc(100% - var(--corner-cut)) 100%,
-      var(--corner-cut) 100%, var(--corner-cut) calc(100% - var(--corner-cut)), 0 calc(100% - var(--corner-cut))
-    );
-  }
+  .pixel { border-radius: 10px; }
 
   /* ---- ambient floating sprites (background decoration) ---- */
   .sprites { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   .sprite { position: absolute; opacity: 0.14; color: var(--ink); animation: drift 9s ease-in-out infinite; }
-  .sprite svg { display: block; shape-rendering: crispEdges; }
-  .sprite .cut { fill: var(--bg); }
+  .sprite svg { display: block; }
   .sprite.s1 { top: 8%;  left: 6%;  width: 34px; animation-delay: 0s; }
   .sprite.s2 { top: 22%; left: 90%; width: 26px; animation-delay: 1.2s; }
   .sprite.s3 { top: 46%; left: 3%;  width: 30px; animation-delay: 2.4s; }
@@ -191,22 +183,13 @@
 
   /* the problem, henry-style prominent card */
   .case-problem-wrap { max-width: 1180px; margin: 0 auto 64px; padding: 0 56px; }
-  .case-problem { border-radius: 24px; padding: 48px 56px; }
+  .case-problem { border-radius: 10px; padding: 48px 56px; background: color-mix(in srgb, var(--ink) 6%, var(--bg)); }
+  .case-problem h3 { color: var(--ink); }
+  .case-problem p { color: var(--ink-soft); }
+  .case-problem p strong { color: var(--ink); }
   .case-problem h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 26px; margin: 0 0 20px; }
   .case-problem p { font-size: 17px; line-height: 1.8; margin: 0 0 26px; max-width: 70ch; }
   .case-problem p strong { font-weight: 700; }
-  .case-problem--green { background: #E1EFDD; }
-  .case-problem--green h3 { color: #1A2E1F; }
-  .case-problem--green p { color: #3A4F3E; }
-  .case-problem--green p strong { color: #16281B; }
-  .case-problem--stone { background: #E7E4DE; }
-  .case-problem--stone h3 { color: #211E19; }
-  .case-problem--stone p { color: #4A453D; }
-  .case-problem--stone p strong { color: #15130F; }
-  .case-problem--pink { background: #FBE1EC; }
-  .case-problem--pink h3 { color: #3D1526; }
-  .case-problem--pink p { color: #5C2A3E; }
-  .case-problem--pink p strong { color: #2E0F1B; }
   .case-problem-cta {
     display: inline-block; padding: 12px 28px; border-radius: 999px; background: #24422C; color: #fff;
     font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em;
@@ -319,21 +302,6 @@
     opacity: 0; transition: opacity .2s ease;
   }
   .ig-video-link:hover .ig-video-overlay { opacity: 1; }
-  .ig-card {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-    aspect-ratio: 9/16; border-radius: 14px; padding: 24px; text-align: center; text-decoration: none;
-    background: linear-gradient(135deg, #FEE2E2 0%, #FBE1EC 45%, #E8D9F3 100%);
-    border: 2px solid var(--border); transition: transform .18s ease, box-shadow .18s ease;
-  }
-  .ig-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
-  .ig-card .ig-icon {
-    width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
-    font-size: 24px; line-height: 1; background: linear-gradient(135deg, #F58529, #DD2A7B 45%, #8134AF 75%, #515BD4 100%);
-  }
-  .ig-card .ig-icon span { display: block; transform: translateY(0.06em); }
-  .ig-card .ig-label { font-family: var(--heading-font); text-transform: uppercase; font-size: 15px; color: var(--ink); margin: 0; }
-  .ig-card .ig-cta { font-family: var(--label-font); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
-
   .watch-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
   .watch-card {
     display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; background: var(--surface); border: 2px solid var(--border);
@@ -678,13 +646,13 @@
   }
   .path-tile:hover { border-color: var(--accent); transform: translateY(-6px) scale(1.045); box-shadow: 8px 8px 0 var(--accent); z-index: 3; }
   .path-tile .path-icon {
-    font-size: 36px; line-height: 1; margin: 0 auto 18px; width: 84px; height: 84px;
-    display: flex; align-items: center; justify-content: center; text-align: center;
+    margin: 0 auto 18px; width: 84px; height: 84px; color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
     box-sizing: border-box;
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+    transition: transform .2s ease;
   }
-  .path-tile:hover .path-icon { transform: scale(1.12) rotate(-8deg); }
-  .path-tile .path-icon span { display: block; transform: translateY(0.06em); }
+  .path-tile .path-icon svg { width: 32px; height: 32px; display: block; }
+  .path-tile:hover .path-icon { transform: scale(1.08); }
   .path-tile .path-label { font-family: var(--heading-font); font-size: 16px; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--ink); }
   .path-tile .path-arrow {
     display: block; margin-top: 10px; font-family: var(--label-font); font-size: 14px; letter-spacing: 0.05em;
@@ -825,13 +793,13 @@
 </style>
 
 <div class="sprites">
-  <div class="sprite s1"><svg viewBox="0 0 80 70" width="34"><path d="M40 70 L10 40 A18 18 0 0 1 40 15 A18 18 0 0 1 70 40 Z" fill="#E8607F"/></svg></div>
-  <div class="sprite s2"><svg viewBox="0 0 80 80" width="26"><path d="M40 5 L48 30 L75 30 L53 46 L61 72 L40 56 L19 72 L27 46 L5 30 L32 30 Z" fill="#F0B429"/></svg></div>
-  <div class="sprite s3"><svg viewBox="0 0 80 80" width="30"><path d="M40 5 C10 15 5 45 20 65 C30 78 40 75 40 75 C40 75 50 78 60 65 C75 45 70 15 40 5 Z" fill="#B980D6"/></svg></div>
-  <div class="sprite s4"><svg viewBox="0 0 100 60" width="40"><rect x="10" y="20" width="80" height="24" rx="0" fill="#4FA8D8"/><rect x="0" y="24" width="16" height="16" fill="#4FA8D8"/><rect x="84" y="24" width="16" height="16" fill="#4FA8D8"/><rect x="26" y="30" width="10" height="10" class="cut"/><rect x="64" y="30" width="10" height="10" class="cut"/></svg></div>
-  <div class="sprite s5"><svg viewBox="0 0 80 70" width="24"><path d="M40 70 L10 40 A18 18 0 0 1 40 15 A18 18 0 0 1 70 40 Z" fill="#E8607F"/></svg></div>
-  <div class="sprite s6"><svg viewBox="0 0 80 80" width="30"><path d="M40 5 L48 30 L75 30 L53 46 L61 72 L40 56 L19 72 L27 46 L5 30 L32 30 Z" fill="#F0B429"/></svg></div>
-  <div class="sprite s7"><svg viewBox="0 0 80 80" width="22"><path d="M40 5 C10 15 5 45 20 65 C30 78 40 75 40 75 C40 75 50 78 60 65 C75 45 70 15 40 5 Z" fill="#B980D6"/></svg></div>
+  <div class="sprite s1"><svg viewBox="0 0 24 24" width="16"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg></div>
+  <div class="sprite s2"><svg viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></div>
+  <div class="sprite s3"><svg viewBox="0 0 24 24" width="16"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+  <div class="sprite s4"><svg viewBox="0 0 24 24" width="16"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 12 12)"/></svg></div>
+  <div class="sprite s5"><svg viewBox="0 0 24 24" width="12"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg></div>
+  <div class="sprite s6"><svg viewBox="0 0 24 24" width="16"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></div>
+  <div class="sprite s7"><svg viewBox="0 0 24 24" width="14"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
 </div>
 
 <div class="app">
@@ -907,10 +875,10 @@
     <section class="section">
       <div class="section-head"><span class="index">02</span><h3>More Work</h3><span class="rule"></span></div>
       <div class="path-grid reveal">
-        <label for="page-ux" class="path-tile pixel path-tile--ux"><div class="path-icon"><span>🎨</span></div><div class="path-label">UX</div><span class="path-arrow">view →</span></label>
-        <label for="page-video" class="path-tile pixel path-tile--video"><div class="path-icon"><span>📹</span></div><div class="path-label">Videography</div><span class="path-arrow">view →</span></label>
-        <label for="page-photo" class="path-tile pixel path-tile--photo"><div class="path-icon"><span>📸</span></div><div class="path-label">Photography</div><span class="path-arrow">view →</span></label>
-        <label for="page-graphic" class="path-tile pixel path-tile--graphic"><div class="path-icon"><span>🖼️</span></div><div class="path-label">Graphic Design</div><span class="path-arrow">view →</span></label>
+        <label for="page-ux" class="path-tile pixel path-tile--ux"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 8-6 2-2 6-6-16z"/></svg></div><div class="path-label">UX</div><span class="path-arrow">view →</span></label>
+        <label for="page-video" class="path-tile pixel path-tile--video"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div><div class="path-label">Videography</div><span class="path-arrow">view →</span></label>
+        <label for="page-photo" class="path-tile pixel path-tile--photo"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/></svg></div><div class="path-label">Photography</div><span class="path-arrow">view →</span></label>
+        <label for="page-graphic" class="path-tile pixel path-tile--graphic"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="1.5"/><circle cx="16" cy="16" r="5"/></svg></div><div class="path-label">Graphic Design</div><span class="path-arrow">view →</span></label>
       </div>
     </section>
 
@@ -2233,10 +2201,10 @@
   }
 
   var spriteShapes = [
-    '<svg viewBox="0 0 80 70" width="16"><path d="M40 70 L10 40 A18 18 0 0 1 40 15 A18 18 0 0 1 70 40 Z" fill="#E8607F"/></svg>',
-    '<svg viewBox="0 0 80 80" width="16"><path d="M40 5 L48 30 L75 30 L53 46 L61 72 L40 56 L19 72 L27 46 L5 30 L32 30 Z" fill="#F0B429"/></svg>',
-    '<svg viewBox="0 0 80 80" width="16"><path d="M40 5 C10 15 5 45 20 65 C30 78 40 75 40 75 C40 75 50 78 60 65 C75 45 70 15 40 5 Z" fill="#B980D6"/></svg>',
-    '<svg viewBox="0 0 100 60" width="18"><rect x="10" y="20" width="80" height="24" fill="#4FA8D8"/><rect x="0" y="24" width="16" height="16" fill="#4FA8D8"/><rect x="84" y="24" width="16" height="16" fill="#4FA8D8"/></svg>'
+    '<svg viewBox="0 0 24 24" width="10"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>',
+    '<svg viewBox="0 0 24 24" width="11"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
+    '<svg viewBox="0 0 24 24" width="10"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 24 24" width="10"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 12 12)"/></svg>'
   ];
   var lastSpriteAt = 0;
   function spawnSprite(x, y) {
