@@ -23,6 +23,9 @@
 <meta name="twitter:title" content="Michelle Sunito | Portfolio">
 <meta name="twitter:description" content="Portfolio of Michelle Sunito: UX/UI design, videography, photography, and graphic design work.">
 <meta name="twitter:image" content="https://michgian8.github.io/michelle-portfolio/assets/images/photo-of-michelle.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0A0A0A;
@@ -36,8 +39,8 @@
     --bar-bg: rgba(10,10,10,0.88);
     --corner-cut: 10px;
     --shadow: 0 10px 30px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
-    --heading-font: ui-monospace, "Cascadia Code", "Consolas", monospace;
-    --label-font: ui-monospace, "Cascadia Code", "Consolas", monospace;
+    --heading-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --label-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --label-tracking: 0.08em;
   }
   :root:has(#theme-toggle:checked) {
@@ -454,7 +457,7 @@
   /* ---- hero ---- */
   .hero {
     display: grid; grid-template-columns: 1fr; gap: 56px;
-    padding: 100px 56px 110px; max-width: 900px; margin: 0 auto;
+    padding: 100px 56px 110px; max-width: 1180px; margin: 0 auto;
   }
   .hero-copy .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 18px; }
 
@@ -528,9 +531,18 @@
   .hero-avatar-inline {
     display: inline-block; vertical-align: middle; margin: -0.1em 0.08em 0;
     width: 2.1em; height: 0.95em; border-radius: 999px; overflow: hidden;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border); position: relative; perspective: 300px;
   }
-  .hero-avatar-inline img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-avatar-inline img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block;
+    transition: transform .2s ease;
+  }
+  .hero-avatar-inline::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: linear-gradient(115deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0) 72%, rgba(255,255,255,0.4) 100%);
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .hero-avatar-inline:hover::after { opacity: 1; }
 
   /* ---- section shell ---- */
   .section { padding: 0 56px 96px; max-width: 1180px; margin: 0 auto; }
@@ -2199,6 +2211,18 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // hero avatar pill: 3D tilt toward the cursor, like a glassy pill
+  (function () {
+    var wrap = document.querySelector('.hero-avatar-inline');
+    var img = wrap ? wrap.querySelector('img') : null;
+    if (!wrap || !img || reduceMotion) return;
+    wrap.addEventListener('mousemove', function (e) {
+      var r = wrap.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      img.style.transform = 'scale(1.15) rotateY(' + (px * 30) + 'deg)';
+    });
+    wrap.addEventListener('mouseleave', function () { img.style.transform = ''; });
+  })();
 
   // rotating identity text, typewriter style
   (function () {
