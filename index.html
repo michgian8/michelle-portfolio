@@ -35,7 +35,7 @@
     --accent-2: #8C8F96;
     --bar-bg: rgba(10,10,10,0.88);
     --corner-cut: 10px;
-    --shadow: 7px 7px 0 rgba(242,242,240,0.10);
+    --shadow: 0 10px 30px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
     --heading-font: ui-monospace, "Cascadia Code", "Consolas", monospace;
     --label-font: ui-monospace, "Cascadia Code", "Consolas", monospace;
     --label-tracking: 0.08em;
@@ -50,7 +50,7 @@
     --accent-ink: #F2F2F0;
     --accent-2: #55585C;
     --bar-bg: rgba(242,242,240,0.88);
-    --shadow: 7px 7px 0 rgba(15,15,14,0.08);
+    --shadow: 0 10px 30px rgba(15,15,14,0.12), 0 2px 8px rgba(15,15,14,0.08);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -307,7 +307,7 @@
     display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; background: var(--surface); border: 2px solid var(--border);
     transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; z-index: 1; position: relative;
   }
-  .watch-card:hover { transform: translateY(-6px) scale(1.03); border-color: var(--ink-soft); box-shadow: 8px 8px 0 var(--border); z-index: 3; }
+  .watch-card:hover { transform: translateY(-6px) scale(1.03); border-color: var(--ink-soft); box-shadow: var(--shadow); z-index: 3; }
   .watch-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #0A0A0A; }
   .watch-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .watch-play {
@@ -612,7 +612,7 @@
     border: none; border-radius: 4px; padding: 4px 9px;
   }
   .canopy-link { display: block; position: relative; text-decoration: none; color: inherit; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; z-index: 1; }
-  .card.canopy-link:hover { transform: translateY(-6px) scale(1.03); border-color: var(--accent); box-shadow: 10px 10px 0 var(--accent); z-index: 3; }
+  .card.canopy-link:hover { transform: translateY(-6px) scale(1.03); border-color: var(--accent); box-shadow: var(--shadow); z-index: 3; }
   .crown-badge {
     position: absolute; top: 16px; right: 16px; z-index: 2;
     display: flex; align-items: center; gap: 0;
@@ -644,7 +644,7 @@
     padding: 39px 15px 27px; text-align: center; overflow: hidden; text-decoration: none;
     transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; z-index: 1;
   }
-  .path-tile:hover { border-color: var(--accent); transform: translateY(-6px) scale(1.045); box-shadow: 8px 8px 0 var(--accent); z-index: 3; }
+  .path-tile:hover { border-color: var(--accent); transform: translateY(-6px) scale(1.045); box-shadow: var(--shadow); z-index: 3; }
   .path-tile .path-icon {
     margin: 0 auto 18px; width: 84px; height: 84px; color: var(--ink);
     display: flex; align-items: center; justify-content: center;
@@ -660,10 +660,6 @@
     opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease;
   }
   .path-tile:hover .path-arrow { opacity: 1; transform: translateY(0); color: var(--accent); }
-  .path-tile--ux:hover { border-color: #9B75D0; box-shadow: 8px 8px 0 #9B75D0; }
-  .path-tile--video:hover { border-color: #4FA3C7; box-shadow: 8px 8px 0 #4FA3C7; }
-  .path-tile--photo:hover { border-color: #DB8A54; box-shadow: 8px 8px 0 #DB8A54; }
-  .path-tile--graphic:hover { border-color: #D9639A; box-shadow: 8px 8px 0 #D9639A; }
   .path-tile--ux:hover .path-arrow, .path-tile--video:hover .path-arrow, .path-tile--photo:hover .path-arrow, .path-tile--graphic:hover .path-arrow { color: var(--ink); }
 
   .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
