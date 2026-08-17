@@ -442,6 +442,15 @@
     font-family: var(--label-font);
   }
   .logo { font-weight: 800; letter-spacing: var(--label-tracking); color: var(--accent); }
+  .mobile-menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+  .hamburger-btn {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 28px; height: 28px; cursor: pointer;
+  }
+  .hamburger-btn span { display: block; width: 100%; height: 2px; background: var(--ink); transition: transform .2s ease, opacity .2s ease; }
+  .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(2) { opacity: 0; }
+  .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
   .nav-links li { font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--ink-soft); font-weight: 600; }
   .nav-links label {
@@ -777,8 +786,15 @@
     .hero { grid-template-columns: 1fr; padding: 64px 24px 56px; }
     .portrait { width: 240px; max-width: 100%; margin: 0 auto; }
     .section, .resume-head, footer.frame-footer { padding-left: 24px; padding-right: 24px; }
-    nav.site-nav { padding: 20px 24px; flex-direction: column; gap: 14px; }
-    .nav-links { flex-wrap: wrap; gap: 12px 16px; }
+    nav.site-nav { padding: 20px 24px; flex-wrap: wrap; }
+    .hamburger-btn { display: flex; }
+    .nav-links {
+      display: none; width: 100%; order: 3; flex-direction: column; gap: 4px;
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .app:has(#mobile-menu-toggle:checked) .nav-links { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links label { display: block; padding: 10px 12px; }
     .loadout, .case-study-grid, .edu-grid, .video-grid { grid-template-columns: 1fr; }
     .photo-grid { grid-template-columns: repeat(2, 1fr); }
     .media-head { padding: 48px 24px 32px; }
@@ -814,11 +830,13 @@
     <input type="radio" name="page" id="page-graphic">
     <input type="radio" name="page" id="page-resume">
     <input type="radio" name="page" id="page-about">
+    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
   </div>
 
   <div class="page-home">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
 
@@ -912,6 +930,7 @@
   <div class="page-ux">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="media-head">
@@ -954,6 +973,7 @@
   <div class="page-canopy">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1084,6 +1104,7 @@
   <div class="page-friendsnfamily">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1172,6 +1193,7 @@
   <div class="page-video">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="media-head">
@@ -1303,6 +1325,7 @@
   <div class="page-schedulingfeatures">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1375,6 +1398,7 @@
   <div class="page-neverhaveiever">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1423,6 +1447,7 @@
   <div class="page-deep">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1468,6 +1493,7 @@
   <div class="page-ogc">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1527,6 +1553,7 @@
   <div class="page-unswfood">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="case-hero">
@@ -1580,6 +1607,7 @@
   <div class="page-photo">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="media-head">
@@ -1612,6 +1640,7 @@
   <div class="page-graphic">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="media-head">
@@ -1640,6 +1669,7 @@
   <div class="page-about">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
     <div class="media-head">
@@ -1680,6 +1710,7 @@
   <div class="page-resume">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
+      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
       <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
     </nav>
 
@@ -1942,13 +1973,16 @@
       var id = slugToId[currentSlug()];
       if (!id) return;
       var el = document.getElementById(id);
-      if (el && !el.checked) el.checked = true;
+      if (el && !el.checked) { el.checked = true; window.scrollTo(0, 0); }
     }
     applyPath();
     window.addEventListener('popstate', applyPath);
 
     document.querySelectorAll('input[name="page"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
+        window.scrollTo(0, 0);
+        var menuToggle = document.getElementById('mobile-menu-toggle');
+        if (menuToggle) menuToggle.checked = false;
         var slug = idToSlug[radio.id];
         if (!slug) return;
         var newPath = slug === 'home' ? BASE : BASE + slug;
