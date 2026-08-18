@@ -539,14 +539,13 @@
   .hero-avatar-inline {
     display: inline-block; vertical-align: middle; margin: -0.1em 0.08em 0;
     width: 2.7em; height: 0.95em; border-radius: 999px; overflow: hidden;
-    border: 2px solid var(--border); position: relative; perspective: 220px;
-    background: #F5F5F5;
+    border: 2px solid var(--border); position: relative;
+    background: #F5F5F5; transform-origin: center; will-change: transform; backface-visibility: hidden;
+    transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .hero-avatar-inline img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block;
     filter: saturate(0.98);
-    transform-origin: center; will-change: transform; backface-visibility: hidden;
-    transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .hero-avatar-inline::before {
     content: ""; position: absolute; inset: -50%; pointer-events: none; z-index: 1;
@@ -638,7 +637,7 @@
   }
   .canopy-link:hover .card-cta { color: var(--ink); }
 
-  .path-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 26px; }
+  .path-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
   .path-tile {
     position: relative; background: var(--surface); border: 2px solid var(--border);
     padding: 39px 15px 27px; text-align: center; overflow: hidden; text-decoration: none;
@@ -780,6 +779,7 @@
     .theme-switch--mobile { display: inline-flex; }
     .loadout, .case-study-grid, .edu-grid, .video-grid { grid-template-columns: 1fr; }
     .photo-grid { columns: 2; }
+    .path-grid { grid-template-columns: repeat(2, 1fr); }
     .media-head { padding: 48px 24px 32px; }
     details.role .role-body { padding-left: 22px; }
     footer.frame-footer { flex-direction: column; gap: 6px; }
@@ -2232,18 +2232,17 @@
 
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // hero avatar pill: 3D tilt toward the cursor, like a glassy pill
+  // hero avatar pill: 3D tilt toward the cursor, like a glassy pill (the whole frame moves, not just the photo)
   (function () {
     var wrap = document.querySelector('.hero-avatar-inline');
-    var img = wrap ? wrap.querySelector('img') : null;
-    if (!wrap || !img || reduceMotion) return;
+    if (!wrap || reduceMotion) return;
     wrap.addEventListener('mousemove', function (e) {
       var r = wrap.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width - 0.5;
       var py = (e.clientY - r.top) / r.height - 0.5;
-      img.style.transform = 'scale(1.08) rotateX(' + (py * -12) + 'deg) rotateY(' + (px * 16) + 'deg)';
+      wrap.style.transform = 'perspective(220px) scale(1.08) rotateX(' + (py * -12) + 'deg) rotateY(' + (px * 16) + 'deg)';
     });
-    wrap.addEventListener('mouseleave', function () { img.style.transform = ''; });
+    wrap.addEventListener('mouseleave', function () { wrap.style.transform = ''; });
   })();
 
   // scroll cue: fades in while the hero is in view, fades out faster once you scroll past it
