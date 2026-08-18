@@ -159,7 +159,7 @@
   /* media gallery pages */
   .media-head { padding: 64px 56px 40px; max-width: 1180px; margin: 0 auto; }
   .media-head .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 14px; }
-  .media-head h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(28px, 4vw, 40px); margin: 0 0 14px; }
+  .media-head h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(28px, 4vw, 40px); margin: 0 0 14px; opacity: 0; animation: hero-in .6s ease forwards; }
   .media-head p { color: var(--ink-soft); max-width: 60ch; line-height: 1.6; font-size: 16px; }
 
   /* canopy case study */
@@ -169,7 +169,7 @@
   .case-hero .eyebrow-row { display: flex; align-items: baseline; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .case-hero .eyebrow-row .tag-plain { font-family: var(--label-font); font-size: 12px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--ink-soft); }
   .case-hero .eyebrow-row .badge { font-family: var(--label-font); font-size: 12px; font-weight: 700; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--accent-ink); background: var(--accent); padding: 4px 10px; }
-  .case-hero h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(32px, 5vw, 48px); margin: 0 0 18px; }
+  .case-hero h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(32px, 5vw, 48px); margin: 0 0 18px; opacity: 0; animation: hero-in .6s ease forwards; }
   .case-hero p.case-lede { color: var(--ink-soft); max-width: 68ch; line-height: 1.7; font-size: 16px; margin: 0 auto 36px; }
   .case-hero-img { max-width: 1000px; margin: 0 auto 64px; padding: 0 56px; }
   .case-hero-img img { width: 100%; height: auto; display: block; }
@@ -491,7 +491,7 @@
   .hero-copy > *:nth-child(4) { animation-delay: .40s; }
   .hero-copy > *:nth-child(5) { animation-delay: .52s; }
   @media (prefers-reduced-motion: reduce) {
-    .hero-copy > * { animation: none; opacity: 1; }
+    .hero-copy > *, .case-hero h2, .media-head h2 { animation: none; opacity: 1; }
   }
   .hero-copy h2 { font-family: var(--heading-font); font-weight: 700; text-transform: uppercase; font-size: clamp(36px, 5vw, 54px); line-height: 1.08; margin: 0 0 18px; text-wrap: balance; }
   .hero-copy h2 span { color: var(--accent); }
@@ -539,7 +539,7 @@
   .hero-avatar-inline {
     display: inline-block; vertical-align: middle; margin: -0.1em 0.08em 0;
     width: 2.7em; height: 0.95em; border-radius: 999px; overflow: hidden;
-    border: 2px solid var(--border); position: relative;
+    position: relative;
     background: #F5F5F5; transform-origin: center; will-change: transform; backface-visibility: hidden;
     transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
