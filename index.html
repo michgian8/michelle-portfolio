@@ -520,32 +520,45 @@
   @media (prefers-reduced-motion: reduce) { .hobby-video-frame { transition: none; } }
   @media (max-width: 760px) { .hobby-grid { gap: 22px; } }
   .hero-scroll { grid-column: 1 / -1; justify-self: center; margin-top: 30px; }
-  .scroll-cue {
-    font-family: var(--label-font); font-size: 14px; letter-spacing: var(--label-tracking); text-transform: uppercase;
-    color: var(--ink); opacity: 0; display: flex; align-items: center; gap: 8px;
-    animation: hero-in .6s ease .8s forwards, blink 1.8s steps(2, jump-none) infinite 1.4s;
-    text-decoration: none; cursor: pointer; background: none; border: none; padding: 0;
+  .scroll-indicator {
+    opacity: 0; transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  @keyframes blink { 50% { opacity: 0.35; } }
-  @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; opacity: 1; } }
+  .scroll-indicator.is-in { opacity: 1; }
+  .scroll-indicator.is-out { opacity: 0; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+  .scroll-cue {
+    display: inline-flex; align-items: baseline; gap: 0.5em;
+    font-family: var(--label-font); font-size: 14px; letter-spacing: var(--label-tracking); text-transform: uppercase;
+    color: var(--ink); text-decoration: none; cursor: pointer; background: none; border: none; padding: 0;
+    animation: scroll-bob 2s ease-in-out infinite;
+  }
+  .scroll-cue-arrow { font-size: 18px; }
+  @keyframes scroll-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; } .scroll-indicator { transition: none; } }
 
-  /* inline hero avatar, pill-shaped, sitting directly in the name heading */
+  /* inline hero avatar, pill-shaped, sitting directly in the name heading, Henry-style */
   .hero-avatar-inline {
     display: inline-block; vertical-align: middle; margin: -0.1em 0.08em 0;
-    width: 2.1em; height: 0.95em; border-radius: 999px; overflow: hidden;
-    border: 2px solid var(--border); position: relative; perspective: 300px;
+    width: 2.7em; height: 0.95em; border-radius: 999px; overflow: hidden;
+    border: 2px solid var(--border); position: relative; perspective: 220px;
+    background: #F5F5F5;
   }
   .hero-avatar-inline img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block;
+    filter: saturate(0.98);
     transform-origin: center; will-change: transform; backface-visibility: hidden;
-    transition: transform .2s ease;
+    transition: transform .3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .hero-avatar-inline::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-    background: linear-gradient(115deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0) 72%, rgba(255,255,255,0.4) 100%);
-    opacity: 0; transition: opacity .2s ease;
+  .hero-avatar-inline::before {
+    content: ""; position: absolute; inset: -50%; pointer-events: none; z-index: 1;
+    width: 200%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: chip-shine-sweep 3s linear infinite;
   }
-  .hero-avatar-inline:hover::after { opacity: 1; }
+  @keyframes chip-shine-sweep {
+    0% { transform: translate(-100%, -100%) rotate(30deg); }
+    100% { transform: translate(100%, 100%) rotate(30deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-avatar-inline::before { animation: none; } }
 
   /* ---- section shell ---- */
   .section { padding: 0 56px 96px; max-width: 1180px; margin: 0 auto; }
@@ -819,7 +832,13 @@
         <p class="tagline">Product design, UX/UI, videography, photography and graphic design. Thoughtful, user-focused work across every medium.</p>
       </div>
       <div class="hero-scroll">
-        <a href="#home-case-studies" class="scroll-cue">▾ scroll to continue</a>
+        <div class="scroll-indicator is-in">
+          <a href="#home-case-studies" class="scroll-cue">
+            <span class="scroll-cue-arrow">↓</span>
+            <span>scroll to continue</span>
+            <span class="scroll-cue-arrow">↓</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -2221,9 +2240,24 @@
     wrap.addEventListener('mousemove', function (e) {
       var r = wrap.getBoundingClientRect();
       var px = (e.clientX - r.left) / r.width - 0.5;
-      img.style.transform = 'scale(1.08) rotateY(' + (px * 16) + 'deg)';
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      img.style.transform = 'scale(1.08) rotateX(' + (py * -12) + 'deg) rotateY(' + (px * 16) + 'deg)';
     });
     wrap.addEventListener('mouseleave', function () { img.style.transform = ''; });
+  })();
+
+  // scroll cue: fades in while the hero is in view, fades out faster once you scroll past it
+  (function () {
+    var indicator = document.querySelector('.scroll-indicator');
+    var hero = document.querySelector('.hero');
+    if (!indicator || !hero || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        indicator.classList.toggle('is-in', entry.isIntersecting);
+        indicator.classList.toggle('is-out', !entry.isIntersecting);
+      });
+    }, { threshold: 0.3 });
+    io.observe(hero);
   })();
 
   // rotating identity text, typewriter style
