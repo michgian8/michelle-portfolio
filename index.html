@@ -452,7 +452,7 @@
   .app:has(#page-graphic:checked) .nav-links label[for="page-graphic"],
   .app:has(#page-resume:checked) .nav-links label[for="page-resume"],
   .app:has(#page-about:checked) .nav-links label[for="page-about"] {
-    color: var(--ink); font-weight: 800; background: color-mix(in srgb, var(--ink) 8%, transparent);
+    color: var(--ink); background: color-mix(in srgb, var(--ink) 8%, transparent);
   }
 
   /* ---- hero ---- */
@@ -461,7 +461,7 @@
     padding: 100px 56px 110px; max-width: 1180px; margin: 0 auto;
   }
   .hero-copy .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 18px; }
-  .hero-copy .kicker.rotator { min-height: 2.8em; }
+  .hero-copy .kicker.rotator { min-height: 2.8em; display: flex; align-items: flex-end; }
 
   /* open to work badge */
   .otw-badge {
@@ -493,7 +493,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-copy > * { animation: none; opacity: 1; }
   }
-  .hero-copy h2 { font-family: var(--heading-font); font-weight: 700; text-transform: uppercase; font-size: clamp(36px, 5vw, 54px); line-height: 1.08; margin: 0 0 24px; text-wrap: balance; }
+  .hero-copy h2 { font-family: var(--heading-font); font-weight: 700; text-transform: uppercase; font-size: clamp(36px, 5vw, 54px); line-height: 1.08; margin: 0 0 18px; text-wrap: balance; }
   .hero-copy h2 span { color: var(--accent); }
   .hero-copy p.tagline { color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; max-width: 46ch; margin: 0 0 30px; }
   .hero-copy .flavor { font-family: var(--label-font); font-size: 16px; letter-spacing: 0.04em; color: var(--ink-soft); border-left: 2px solid var(--accent); padding-left: 14px; line-height: 1.7; max-width: 44ch; margin-bottom: 36px; }
@@ -2233,16 +2233,26 @@
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // hero avatar pill: 3D tilt toward the cursor, like a glassy pill (the whole frame moves, not just the photo)
+  // listens on the wider hero area and falls off by distance, so it reacts before the cursor is directly over the tiny pill
   (function () {
     var wrap = document.querySelector('.hero-avatar-inline');
-    if (!wrap || reduceMotion) return;
-    wrap.addEventListener('mousemove', function (e) {
+    var hero = document.querySelector('.hero');
+    if (!wrap || !hero || reduceMotion) return;
+    var maxDist = 220;
+    hero.addEventListener('mousemove', function (e) {
       var r = wrap.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      wrap.style.transform = 'perspective(220px) scale(1.08) rotateX(' + (py * -12) + 'deg) rotateY(' + (px * 16) + 'deg)';
+      var cx = r.left + r.width / 2;
+      var cy = r.top + r.height / 2;
+      var dx = e.clientX - cx;
+      var dy = e.clientY - cy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > maxDist) { wrap.style.transform = ''; return; }
+      var strength = 1 - dist / maxDist;
+      var px = dx / maxDist;
+      var py = dy / maxDist;
+      wrap.style.transform = 'perspective(220px) scale(' + (1 + 0.08 * strength) + ') rotateX(' + (py * -12 * strength) + 'deg) rotateY(' + (px * 16 * strength) + 'deg)';
     });
-    wrap.addEventListener('mouseleave', function () { wrap.style.transform = ''; });
+    hero.addEventListener('mouseleave', function () { wrap.style.transform = ''; });
   })();
 
   // scroll cue: fades in while the hero is in view, fades out faster once you scroll past it
