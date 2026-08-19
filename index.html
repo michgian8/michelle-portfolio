@@ -164,7 +164,7 @@
 
   /* the problem, henry-style prominent card */
   .case-problem-wrap { max-width: 1180px; margin: 0 auto 64px; padding: 0 56px; }
-  .case-problem { border-radius: 10px; padding: 48px 56px; background: color-mix(in srgb, var(--ink) 6%, var(--bg)); }
+  .case-problem { border-radius: 10px; padding: 48px 56px; max-width: 820px; background: color-mix(in srgb, var(--ink) 6%, var(--bg)); }
   .case-problem h3 { color: var(--ink); }
   .case-problem p { color: var(--ink-soft); }
   .case-problem p strong { color: var(--ink); }
@@ -180,7 +180,6 @@
 
   .case-highlight-row { max-width: 1180px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   .case-highlight { border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; }
-  .case-highlight .hl-icon { font-size: 24px; line-height: 1; }
   .case-highlight h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; margin: 2px 0 0; }
   .case-highlight p { font-size: 13.5px; line-height: 1.55; margin: 0; }
   .case-highlight p strong { font-weight: 700; }
@@ -1027,17 +1026,14 @@
     <div class="case-wide-head reveal"><h3>The Solution</h3></div>
     <div class="case-highlight-row reveal" id="canopy-solution">
       <div class="case-highlight case-highlight--lavender">
-        <span class="hl-icon">🌳</span>
         <h3>Personal Trees, Not Profiles</h3>
         <p>A short personality quiz grows your <strong>"tree"</strong>, a gentler, low-stakes way to introduce yourself before a word is exchanged.</p>
       </div>
       <div class="case-highlight case-highlight--sky">
-        <span class="hl-icon">📅</span>
         <h3>Booking, Without the Awkwardness</h3>
         <p>Pick a time, confirm a location, done. Small, clear decisions that <strong>lower the barrier</strong> to actually pressing "book."</p>
       </div>
       <div class="case-highlight case-highlight--peach">
-        <span class="hl-icon">🤖</span>
         <h3>An AI Assistant That Listens</h3>
         <p>After a meeting, the assistant <strong>summarises key takeaways</strong> so students can stay present instead of taking notes.</p>
       </div>
@@ -1340,15 +1336,20 @@
       <div class="case-insight"><span class="insight-num">03</span><p>Mapped edge cases directly with engineering to keep designs technically feasible without adding friction for clients or talent.</p></div>
       <div class="case-insight"><span class="insight-num">04</span><p>Worked cross-functionally with product managers, engineers, and senior stakeholders on a fast-moving, iterative roadmap.</p></div>
     </div>
-    <div class="case-section reveal">
-      <h3>Solution</h3>
-      <p>Configurable scheduling functionality that adapts to complex shift patterns while staying compliant with labour rules on both sides of the Pacific:</p>
-      <ul class="case-opportunity-list">
-        <li><strong>Desktop &amp; app parity</strong>: scheduling features designed consistently across web and mobile experiences.</li>
-        <li><strong>Compliance-aware flexibility</strong>: configurable rules that adapt to US and UK labour requirements without adding friction.</li>
-        <li><strong>Edge-case coverage</strong>: worked with engineering to handle unusual shift patterns before they became support issues.</li>
-        <li><strong>Executive &amp; client communication</strong>: built slide decks and demo videos used in stakeholder and client-facing presentations.</li>
-      </ul>
+    <div class="case-wide-head reveal"><h3>Solution</h3></div>
+    <div class="case-highlight-row reveal" id="scheduling-solution">
+      <div class="case-highlight case-highlight--lavender">
+        <h3>Desktop &amp; App Parity</h3>
+        <p>Scheduling features designed <strong>consistently across web and mobile</strong>, so workers and clients get the same experience wherever they log in.</p>
+      </div>
+      <div class="case-highlight case-highlight--sky">
+        <h3>Compliance-Aware Flexibility</h3>
+        <p>Configurable rules that adapt to <strong>US and UK labour requirements</strong> without adding friction for the people scheduling shifts.</p>
+      </div>
+      <div class="case-highlight case-highlight--peach">
+        <h3>Edge-Case Coverage</h3>
+        <p>Worked directly with engineering to handle <strong>unusual shift patterns</strong> before they became support issues.</p>
+      </div>
     </div>
     <div class="case-section reveal">
       <h3>Outcomes &amp; Retrospective</h3>
