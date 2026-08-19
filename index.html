@@ -460,6 +460,17 @@
     padding: 100px 56px 110px; max-width: 1180px; margin: 0 auto;
   }
 
+  /* persistent faint symbol field, reuses the ambient sprite shapes as a tiling mask */
+  .hero-symbol-field {
+    position: absolute; inset: 0; z-index: -2; pointer-events: none;
+    background: var(--ink); opacity: 0.05;
+    -webkit-mask-repeat: repeat; mask-repeat: repeat;
+    -webkit-mask-size: 80px 80px; mask-size: 80px 80px;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='12' cy='18' r='4' fill='black'/%3E%3Ccircle cx='45' cy='8' r='5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M78 10v10M73 15h10' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='16' y='48' width='8' height='8' rx='1.5' fill='black' transform='rotate(45 20 52)'/%3E%3Ccircle cx='60' cy='48' r='3.5' fill='black'/%3E%3Ccircle cx='90' cy='55' r='4.5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M35 75v10M30 80h10' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='66' y='81' width='7' height='7' rx='1.5' fill='black' transform='rotate(45 70 85)'/%3E%3Ccircle cx='5' cy='85' r='3' fill='black'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='12' cy='18' r='4' fill='black'/%3E%3Ccircle cx='45' cy='8' r='5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M78 10v10M73 15h10' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='16' y='48' width='8' height='8' rx='1.5' fill='black' transform='rotate(45 20 52)'/%3E%3Ccircle cx='60' cy='48' r='3.5' fill='black'/%3E%3Ccircle cx='90' cy='55' r='4.5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M35 75v10M30 80h10' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='66' y='81' width='7' height='7' rx='1.5' fill='black' transform='rotate(45 70 85)'/%3E%3Ccircle cx='5' cy='85' r='3' fill='black'/%3E%3C/svg%3E");
+  }
+  :root:has(#theme-toggle:checked) .hero-symbol-field { opacity: 0.08; }
+
   /* one-time entrance scatter, reuses the ambient sprite shapes */
   .hero-scatter { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
   .hero-scatter-sprite {
@@ -843,6 +854,7 @@
     </nav>
 
     <section class="hero">
+      <div class="hero-symbol-field" aria-hidden="true"></div>
       <div class="hero-scatter" aria-hidden="true"></div>
       <div class="hero-copy">
         <span class="otw-badge"><span class="otw-dot"></span>open to work</span>
