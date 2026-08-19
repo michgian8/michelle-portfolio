@@ -28,22 +28,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0A0A0A;
-    --surface: #161616;
-    --ink: #F2F2F0;
-    --ink-soft: #8C8F96;
-    --border: #2C2E2F;
-    --accent: #F2F2F0;
-    --accent-ink: #0A0A0A;
-    --accent-2: #8C8F96;
-    --bar-bg: rgba(10,10,10,0.88);
-    --corner-cut: 10px;
-    --shadow: 0 10px 30px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25);
-    --heading-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --label-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    --label-tracking: 0.08em;
-  }
-  :root:has(#theme-toggle:checked) {
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -53,7 +37,11 @@
     --accent-ink: #F2F2F0;
     --accent-2: #55585C;
     --bar-bg: rgba(242,242,240,0.88);
+    --corner-cut: 10px;
     --shadow: 0 10px 30px rgba(15,15,14,0.12), 0 2px 8px rgba(15,15,14,0.08);
+    --heading-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --label-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --label-tracking: 0.08em;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -103,7 +91,7 @@
 
   /* ---- ambient floating sprites (background decoration) ---- */
   .sprites { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .sprite { position: absolute; opacity: 0.14; color: var(--ink); animation: drift 9s ease-in-out infinite; }
+  .sprite { position: absolute; opacity: 0.22; color: var(--ink); animation: drift 9s ease-in-out infinite; }
   .sprite svg { display: block; }
   .sprite.s1 { top: 8%;  left: 6%;  width: 34px; animation-delay: 0s; }
   .sprite.s2 { top: 22%; left: 90%; width: 26px; animation-delay: 1.2s; }
@@ -117,19 +105,9 @@
     50% { transform: translateY(-16px) rotate(6deg); }
   }
   @media (prefers-reduced-motion: reduce) { .sprite { animation: none; } }
-  :root:has(#theme-toggle:checked) .sprite { opacity: 0.22; }
 
   /* ---- hidden routing inputs ---- */
   .page-inputs { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden; }
-  .theme-switch {
-    padding: 5px 9px; border: 2px solid var(--border); cursor: pointer;
-    color: var(--ink-soft); font-weight: 700; border-radius: 20px;
-    transition: color .15s ease, border-color .15s ease;
-  }
-  .theme-switch:hover { color: var(--ink); border-color: var(--ink); }
-  .theme-switch .icon-light { display: none; }
-  :root:has(#theme-toggle:checked) .theme-switch .icon-dark { display: none; }
-  :root:has(#theme-toggle:checked) .theme-switch .icon-light { display: inline; }
 
   .app { position: relative; z-index: 1; }
   img {
@@ -421,10 +399,7 @@
   .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(2) { opacity: 0; }
   .app:has(#mobile-menu-toggle:checked) .hamburger-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .theme-switch--mobile { display: none; }
   @media (hover: none) {
-    .crown-badge { padding: 7px 14px 7px 7px; background: var(--accent); border-color: var(--accent); }
-    .crown-badge .crown-reveal { max-width: 220px; opacity: 1; margin-left: 8px; }
     .ig-video-overlay { opacity: 1; }
   }
   .nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
@@ -483,12 +458,10 @@
   .otw-badge {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--label-font); font-size: 14px; letter-spacing: var(--label-tracking); text-transform: uppercase;
-    border: 1px solid #2E5C3E; color: #7FCB9C; background: rgba(58,140,94,0.10);
+    border: 1px solid #2F7A45; color: #2F7A45; background: #E3F2E7;
     border-radius: 999px; padding: 6px 14px; margin: 0 0 18px;
   }
-  .otw-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; animation: otw-ping 2.2s ease-in-out infinite; }
-  :root:has(#theme-toggle:checked) .otw-badge { border-color: #2F7A45; color: #2F7A45; background: #E3F2E7; }
-  :root:has(#theme-toggle:checked) .otw-dot { background: #2F7A45; }
+  .otw-dot { width: 6px; height: 6px; border-radius: 50%; background: #2F7A45; animation: otw-ping 2.2s ease-in-out infinite; }
   @keyframes otw-ping { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.8); opacity: 0.4; } }
   @media (prefers-reduced-motion: reduce) { .otw-dot { animation: none; } }
 
@@ -796,7 +769,6 @@
     .nav-links li { width: 100%; }
     .nav-links label { display: block; padding: 10px 12px; }
     .nav-links li:last-child { display: none; }
-    .theme-switch--mobile { display: inline-flex; }
     .loadout, .case-study-grid, .edu-grid, .video-grid { grid-template-columns: 1fr; }
     .photo-grid { columns: 2; }
     .path-grid { grid-template-columns: repeat(2, 1fr); }
@@ -818,7 +790,6 @@
 
 <div class="app">
   <div class="page-inputs" aria-hidden="true">
-    <input type="checkbox" id="theme-toggle" class="theme-switch-input" checked>
     <input type="radio" name="page" id="page-home" checked>
     <input type="radio" name="page" id="page-ux">
     <input type="radio" name="page" id="page-canopy">
@@ -839,9 +810,8 @@
   <div class="page-home">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
 
     <section class="hero">
@@ -914,6 +884,10 @@
             <blockquote>"Michelle was a great hands-on help, and it's clear she's a great designer. She took a limited brief and used her intuition and creativity to craft a website that went beyond what we'd originally imagined. She has a great ability to take a brief, expand on it thoughtfully, and work with feedback to make a unique and powerful result."</blockquote>
             <cite>Samuel Sunito · Managing Director, Friends n Family</cite>
           </div>
+          <div class="quote-slide">
+            <blockquote>"Michelle is a talented designer with a real gift for untangling complex problems and turning them into clean, effective solutions. Beyond the work, Michelle is kind, respectful, and a genuine pleasure to collaborate with, the kind of colleague who makes a team better."</blockquote>
+            <cite>Anonymous Colleague</cite>
+          </div>
         </div>
         <div class="screen-carousel-nav">
           <button type="button" class="screen-arrow quote-prev" aria-label="Previous quote">←</button>
@@ -922,6 +896,7 @@
             <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
             <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
             <button type="button" class="quote-dot" data-index="3" aria-label="Quote 4"></button>
+            <button type="button" class="quote-dot" data-index="4" aria-label="Quote 5"></button>
           </div>
           <button type="button" class="screen-arrow quote-next" aria-label="Next quote">→</button>
         </div>
@@ -937,9 +912,8 @@
   <div class="page-ux">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">UX/UI Design</p>
@@ -957,7 +931,7 @@
           <span class="card-cta">View full case study →</span>
         </label>
         <label for="page-schedulingfeatures" class="card pixel reveal canopy-link">
-          <div class="card-thumb card-thumb--scheduling"><img loading="lazy" src="assets/images/scheduling-features-mockup.jpg" alt="Scheduling Features mockup"></div>
+          <div class="card-thumb card-thumb--scheduling"><img loading="lazy" src="assets/images/scheduling-features-thumbnail.png" alt="Scheduling Features mockup"></div>
           <h4>Scheduling Features</h4>
           <p>Configurable shift scheduling for a US/UK recruiting platform, balancing complex labour rules with a friction-free experience for clients and talent.</p>
           <div class="chip-row"><span class="chip">Figma</span><span class="chip">Claude</span><span class="chip">Product Design</span><span class="chip">Cross-fn Collaboration</span></div>
@@ -981,9 +955,8 @@
   <div class="page-canopy">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Case Studies</label>
@@ -1107,9 +1080,8 @@
   <div class="page-friendsnfamily">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Case Studies</label>
@@ -1191,9 +1163,8 @@
   <div class="page-video">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Motion &amp; Video</p>
@@ -1324,9 +1295,8 @@
   <div class="page-schedulingfeatures">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Case Studies</label>
@@ -1398,9 +1368,8 @@
   <div class="page-neverhaveiever">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1448,9 +1417,8 @@
   <div class="page-deep">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1495,9 +1463,8 @@
   <div class="page-ogc">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1556,9 +1523,8 @@
   <div class="page-unswfood">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1611,9 +1577,8 @@
   <div class="page-photo">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Photography</p>
@@ -1645,9 +1610,8 @@
   <div class="page-graphic">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Graphic Design</p>
@@ -1675,9 +1639,8 @@
   <div class="page-about">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">About</p>
@@ -1717,9 +1680,8 @@
   <div class="page-resume">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
-      <label for="theme-toggle" class="theme-switch theme-switch--mobile"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li><li><label for="theme-toggle" class="theme-switch"><span class="icon-dark">🌙</span><span class="icon-light">☀️</span></label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
 
     <div class="resume-head">
@@ -1932,6 +1894,10 @@
             <blockquote>"Michelle was a great hands-on help, and it's clear she's a great designer. She took a limited brief and used her intuition and creativity to craft a website that went beyond what we'd originally imagined. She has a great ability to take a brief, expand on it thoughtfully, and work with feedback to make a unique and powerful result."</blockquote>
             <cite>Samuel Sunito · Managing Director, Friends n Family</cite>
           </div>
+          <div class="quote-slide">
+            <blockquote>"Michelle is a talented designer with a real gift for untangling complex problems and turning them into clean, effective solutions. Beyond the work, Michelle is kind, respectful, and a genuine pleasure to collaborate with, the kind of colleague who makes a team better."</blockquote>
+            <cite>Anonymous Colleague</cite>
+          </div>
         </div>
         <div class="screen-carousel-nav">
           <button type="button" class="screen-arrow quote-prev" aria-label="Previous quote">←</button>
@@ -1940,6 +1906,7 @@
             <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
             <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
             <button type="button" class="quote-dot" data-index="3" aria-label="Quote 4"></button>
+            <button type="button" class="quote-dot" data-index="4" aria-label="Quote 5"></button>
           </div>
           <button type="button" class="screen-arrow quote-next" aria-label="Next quote">→</button>
         </div>
@@ -2238,7 +2205,7 @@
   }
 
   var cursorEl = document.getElementById('game-cursor');
-  var hoverSelector = 'a, label, summary, .path-tile, .tag, .theme-switch, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img';
+  var hoverSelector = 'a, label, summary, .path-tile, .tag, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img';
   window.addEventListener('mousemove', function (e) {
     cursorEl.style.display = 'block';
     cursorEl.style.left = e.clientX + 'px';
