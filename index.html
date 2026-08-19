@@ -2131,8 +2131,7 @@
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var video = entry.target;
-        video.addEventListener('canplay', function () { video.play().catch(function () {}); });
-        video.addEventListener('loadeddata', function () { video.play().catch(function () {}); });
+        video.addEventListener('canplaythrough', function () { video.play().catch(function () {}); });
         video.src = video.dataset.src;
         video.removeAttribute('data-src');
         video.load();
