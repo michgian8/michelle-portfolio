@@ -484,7 +484,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--label-font); font-size: 14px; letter-spacing: var(--label-tracking); text-transform: uppercase;
     border: 1px solid #2E5C3E; color: #7FCB9C; background: rgba(58,140,94,0.10);
-    border-radius: 999px; padding: 6px 14px; margin: 0 0 20px;
+    border-radius: 999px; padding: 6px 14px; margin: 0 0 18px;
   }
   .otw-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; animation: otw-ping 2.2s ease-in-out infinite; }
   :root:has(#theme-toggle:checked) .otw-badge { border-color: #2F7A45; color: #2F7A45; background: #E3F2E7; }
@@ -494,6 +494,7 @@
 
   /* rotating identity text */
   .rotator { font-family: var(--label-font); }
+  .rotator-live { display: inline-block; height: 1.4em; line-height: 1.4em; }
   .rotator-live::after { content: ""; display: inline-block; width: 2px; height: 0.9em; background: currentColor; margin-left: 2px; vertical-align: -0.1em; animation: rotator-blink 1s steps(1) infinite; }
   @keyframes rotator-blink { 50% { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) { .rotator-live::after { animation: none; } }
