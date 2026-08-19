@@ -456,8 +456,9 @@
   /* ---- hero ---- */
   .hero {
     position: relative;
-    display: grid; grid-template-columns: 1fr; gap: 56px;
+    display: grid; grid-template-columns: 1fr; gap: 80px;
     padding: 100px 56px 110px; max-width: 1180px; margin: 0 auto;
+    min-height: 82vh; align-content: center;
   }
 
   /* one-time entrance scatter, reuses the ambient sprite shapes */
@@ -782,7 +783,7 @@
   }
 
   @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; padding: 64px 24px 56px; }
+    .hero { grid-template-columns: 1fr; padding: 64px 24px 56px; min-height: auto; gap: 56px; }
     .section, .resume-head, footer.frame-footer { padding-left: 24px; padding-right: 24px; }
     nav.site-nav { padding: 20px 24px; flex-wrap: wrap; }
     .hamburger-btn { display: flex; }
