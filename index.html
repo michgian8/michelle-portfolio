@@ -455,9 +455,26 @@
 
   /* ---- hero ---- */
   .hero {
+    position: relative;
     display: grid; grid-template-columns: 1fr; gap: 56px;
     padding: 100px 56px 110px; max-width: 1180px; margin: 0 auto;
   }
+
+  /* one-time entrance scatter, reuses the ambient sprite shapes */
+  .hero-scatter { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .hero-scatter-sprite {
+    position: absolute; top: 0; left: 0; color: var(--ink); opacity: 0;
+    animation: scatter-pulse 2s ease forwards;
+    animation-delay: var(--scatter-delay, 0s);
+  }
+  .hero-scatter-sprite svg { display: block; width: 100%; }
+  @keyframes scatter-pulse {
+    0%   { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+    20%  { opacity: 0.26; transform: scale(1) rotate(0deg); }
+    68%  { opacity: 0.16; transform: scale(1) rotate(3deg); }
+    100% { opacity: 0; transform: scale(0.82) rotate(8deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-scatter { display: none; } }
   .hero-copy .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 18px; }
   .hero-copy .kicker.rotator { min-height: 2.8em; display: flex; align-items: flex-end; }
 
@@ -826,6 +843,7 @@
     </nav>
 
     <section class="hero">
+      <div class="hero-scatter" aria-hidden="true"></div>
       <div class="hero-copy">
         <span class="otw-badge"><span class="otw-dot"></span>open to work</span>
         <p class="kicker rotator"><span class="rotator-live"><span class="rotator-text">Multimedia Designer</span></span></p>
@@ -2152,6 +2170,47 @@
     carousel.addEventListener('mouseleave', start);
     start();
   });
+
+  // one-time hero entrance scatter: reuses the ambient sprite shapes, plays once per session
+  (function () {
+    var host = document.querySelector('.hero-scatter');
+    if (!host) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (sessionStorage.getItem('ms-hero-scatter-played')) return;
+    sessionStorage.setItem('ms-hero-scatter-played', '1');
+
+    var shapes = [
+      '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>',
+      '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
+      '<svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>',
+      '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" transform="rotate(45 12 12)"/></svg>'
+    ];
+
+    var cols = 8, rows = 5;
+    var frag = document.createDocumentFragment();
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        if (Math.random() < 0.4) continue; // sparse, loose field rather than a tight grid
+        var el = document.createElement('div');
+        el.className = 'hero-scatter-sprite';
+        el.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+        var baseX = (c + 0.5) / cols * 100;
+        var baseY = (r + 0.5) / rows * 100;
+        var jitterX = (Math.random() - 0.5) * (100 / cols) * 0.85;
+        var jitterY = (Math.random() - 0.5) * (100 / rows) * 0.85;
+        var size = 12 + Math.random() * 18;
+        el.style.left = (baseX + jitterX) + '%';
+        el.style.top = (baseY + jitterY) + '%';
+        el.style.width = size + 'px';
+        el.style.marginLeft = (-size / 2) + 'px';
+        el.style.marginTop = (-size / 2) + 'px';
+        el.style.setProperty('--scatter-delay', (Math.random() * 0.5) + 's');
+        frag.appendChild(el);
+      }
+    }
+    host.appendChild(frag);
+    setTimeout(function () { host.remove(); }, 2700);
+  })();
 
   var spriteShapes = [
     '<svg viewBox="0 0 24 24" width="10"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>',
