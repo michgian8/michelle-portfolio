@@ -247,17 +247,20 @@
   .case-outcomes-list li { font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
   .case-outcomes-list li strong { color: var(--ink); display: block; font-family: var(--heading-font); text-transform: uppercase; font-size: 13px; letter-spacing: 0.03em; margin-bottom: 3px; }
 
-  /* screens carousel, bigger */
-  .screen-carousel { max-width: 520px; margin: 0 auto 64px; padding: 0 24px; }
-  .screen-carousel-track { display: grid; }
-  .screen-slide {
-    grid-area: 1 / 1; opacity: 0; transform: translateY(10px); text-align: center;
-    transition: opacity .4s ease, transform .4s ease; pointer-events: none;
+  /* screens filmstrip: continuously panning row of screenshots */
+  .screen-filmstrip {
+    max-width: 900px; margin: 0 auto 64px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   }
-  .screen-slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
+  .screen-filmstrip-track { display: flex; width: max-content; animation: filmstrip-pan linear infinite; }
+  .screen-filmstrip:hover .screen-filmstrip-track { animation-play-state: paused; }
+  @keyframes filmstrip-pan { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .screen-filmstrip-track { animation: none; } }
+  .screen-slide { flex: 0 0 auto; width: 260px; margin-right: 24px; text-align: center; }
   .screen-slide img {
-    width: 100%; max-width: 340px; border-radius: 22px; box-shadow: var(--shadow);
-    display: block; margin: 0 auto; cursor: none;
+    width: 100%; border-radius: 22px; box-shadow: var(--shadow);
+    display: block; cursor: none;
   }
   .screen-caption {
     margin-top: 18px; font-family: var(--label-font); font-size: 14px; color: var(--ink-soft);
@@ -270,12 +273,6 @@
     transition: border-color .15s ease, transform .15s ease; padding: 0; box-sizing: border-box;
   }
   .screen-arrow:hover { border-color: var(--accent); transform: scale(1.08); }
-  .screen-dots { display: flex; gap: 8px; }
-  .screen-dot {
-    width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--border); padding: 0;
-    transition: background .2s ease, transform .2s ease;
-  }
-  .screen-dot.is-active { background: var(--accent); transform: scale(1.35); }
 
   .case-team-photo { max-width: 1180px; margin: 0 auto 20px; padding: 0 56px; }
   .case-team-photo img { width: 100%; height: auto; display: block; border-radius: 12px; }
@@ -852,7 +849,7 @@
         <label for="page-canopy" class="card pixel reveal canopy-link">
           <div class="card-thumb card-thumb--canopy"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
           <span class="crown-badge"><span class="crown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,19 L3,10 L8,14 L12,5 L16,14 L21,10 L21,19 Z"/></svg></span><span class="crown-reveal">PIP25C2 Runner-Up · 2nd Place</span></span>
-          <h4>Canopy 🌿</h4>
+          <h4>Canopy</h4>
           <p>A safe, low-pressure way for students and tutors to connect, with personal trees and easy booking.</p>
           <div class="chip-row"><span class="chip">Figma</span><span class="chip">UX/UI Design</span><span class="chip">User Research</span></div>
           <span class="card-cta">View Case Study →</span>
@@ -893,6 +890,10 @@
             <blockquote>"Michelle was a great hands-on help, and it's clear she's a great designer. She took a limited brief and used her intuition and creativity to craft a website that went beyond what we'd originally imagined. She has a great ability to take a brief, expand on it thoughtfully, and work with feedback to make a unique and powerful result."</blockquote>
             <cite>Samuel Sunito · Managing Director, Friends n Family</cite>
           </div>
+          <div class="quote-slide">
+            <blockquote>"It was a pleasure working with Michelle. She's a thoughtful and talented designer who brings a strong eye for detail and a genuine curiosity to her work. She's collaborative, open to feedback, and always willing to learn and take on new challenges. It's been great to see her confidence and skills grow."</blockquote>
+            <cite>Sri Vatsavai · Product Designer, Swipejobs</cite>
+          </div>
         </div>
         <div class="screen-carousel-nav">
           <button type="button" class="screen-arrow quote-prev" aria-label="Previous quote">←</button>
@@ -900,6 +901,7 @@
             <button type="button" class="quote-dot is-active" data-index="0" aria-label="Quote 1"></button>
             <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
             <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
+            <button type="button" class="quote-dot" data-index="3" aria-label="Quote 4"></button>
           </div>
           <button type="button" class="screen-arrow quote-next" aria-label="Next quote">→</button>
         </div>
@@ -929,7 +931,7 @@
         <label for="page-canopy" class="card pixel reveal canopy-link">
           <div class="card-thumb"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
           <span class="crown-badge"><span class="crown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,19 L3,10 L8,14 L12,5 L16,14 L21,10 L21,19 Z"/></svg></span><span class="crown-reveal">PIP25C2 Runner-Up · 2nd Place</span></span>
-          <h4>Canopy 🌿</h4>
+          <h4>Canopy</h4>
           <p>Personal trees, low-pressure booking, and an AI assistant, built by a team of six for tutor-student connections.</p>
           <div class="chip-row"><span class="chip">Figma</span><span class="chip">UX/UI Design</span><span class="chip">User Research</span></div>
           <span class="card-cta">View full case study →</span>
@@ -965,7 +967,7 @@
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Case Studies</label>
-      <h2>Canopy 🌿</h2>
+      <h2>Canopy</h2>
       <div class="eyebrow-row">
         <span class="tag-plain">UX/UI Design · User Research</span>
         <span class="tag-plain">June – August 2025</span>
@@ -1047,26 +1049,20 @@
         <p>After a meeting, the assistant <strong>summarises key takeaways</strong> so students can stay present instead of taking notes.</p>
       </div>
     </div>
-    <div class="screen-carousel reveal">
-      <div class="screen-carousel-track">
-      <div class="screen-slide is-active"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="Canopy onboarding screen"><p class="screen-caption">Onboarding</p></div>
+    <div class="screen-filmstrip reveal">
+      <div class="screen-filmstrip-track" style="animation-duration: 40s">
+      <div class="screen-slide"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="Canopy onboarding screen"><p class="screen-caption">Onboarding</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt="Student or tutor role selection"><p class="screen-caption">Choose your role</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt="Tree personality result screen"><p class="screen-caption">Meet your tree</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt="Low-pressure meeting booking screen"><p class="screen-caption">Book a meeting</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt="Booking success screen"><p class="screen-caption">Booking confirmed</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt="AI meeting assistant summary screen"><p class="screen-caption">AI meeting summary</p></div>
-      </div>
-      <div class="screen-carousel-nav">
-        <button type="button" class="screen-arrow screen-prev" aria-label="Previous screen">←</button>
-        <div class="screen-dots">
-          <button type="button" class="screen-dot is-active" data-index="0" aria-label="Screen 1"></button>
-          <button type="button" class="screen-dot" data-index="1" aria-label="Screen 2"></button>
-          <button type="button" class="screen-dot" data-index="2" aria-label="Screen 3"></button>
-          <button type="button" class="screen-dot" data-index="3" aria-label="Screen 4"></button>
-          <button type="button" class="screen-dot" data-index="4" aria-label="Screen 5"></button>
-          <button type="button" class="screen-dot" data-index="5" aria-label="Screen 6"></button>
-        </div>
-        <button type="button" class="screen-arrow screen-next" aria-label="Next screen">→</button>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="" ><p class="screen-caption">Onboarding</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt=""><p class="screen-caption">Choose your role</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt=""><p class="screen-caption">Meet your tree</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt=""><p class="screen-caption">Book a meeting</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt=""><p class="screen-caption">Booking confirmed</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt=""><p class="screen-caption">AI meeting summary</p></div>
       </div>
     </div>
     <div class="case-section reveal">
@@ -1146,22 +1142,16 @@
         <li><strong>Contact/Community</strong>: invites high-net-worth families into the conversation with an elevated yet approachable tone.</li>
       </ul>
     </div>
-    <div class="screen-carousel reveal">
-      <div class="screen-carousel-track">
-      <div class="screen-slide is-active"><img loading="lazy" src="assets/images/friends-n-family-homepage.jpg" alt="Friends n Family homepage"><p class="screen-caption">Homepage</p></div>
+    <div class="screen-filmstrip reveal">
+      <div class="screen-filmstrip-track" style="animation-duration: 28s">
+      <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-homepage.jpg" alt="Friends n Family homepage"><p class="screen-caption">Homepage</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-philosophy-page.jpg" alt="Friends n Family philosophy page"><p class="screen-caption">Our Philosophy</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-opportunities-page.jpg" alt="Friends n Family opportunities page"><p class="screen-caption">Opportunities</p></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-our-story-page.jpg" alt="Friends n Family our story page"><p class="screen-caption">Our Story</p></div>
-      </div>
-      <div class="screen-carousel-nav">
-        <button type="button" class="screen-arrow screen-prev" aria-label="Previous screen">←</button>
-        <div class="screen-dots">
-          <button type="button" class="screen-dot is-active" data-index="0" aria-label="Screen 1"></button>
-          <button type="button" class="screen-dot" data-index="1" aria-label="Screen 2"></button>
-          <button type="button" class="screen-dot" data-index="2" aria-label="Screen 3"></button>
-          <button type="button" class="screen-dot" data-index="3" aria-label="Screen 4"></button>
-        </div>
-        <button type="button" class="screen-arrow screen-next" aria-label="Next screen">→</button>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/friends-n-family-homepage.jpg" alt=""><p class="screen-caption">Homepage</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/friends-n-family-philosophy-page.jpg" alt=""><p class="screen-caption">Our Philosophy</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/friends-n-family-opportunities-page.jpg" alt=""><p class="screen-caption">Opportunities</p></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/friends-n-family-our-story-page.jpg" alt=""><p class="screen-caption">Our Story</p></div>
       </div>
     </div>
     <div class="case-section reveal">
@@ -1612,18 +1602,18 @@
     </div>
     <section class="section" style="padding-top:0;">
       <div class="photo-grid">
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/walking-down-a-spiral-staircase.jpg" alt="Walking down a spiral staircase"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/ski-resort-switzerland.jpg" alt="Ski resort, Switzerland"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/riverside-town-at-dusk-switzerland.jpg" alt="Riverside town at dusk, Switzerland"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/lakeside-silhouette.jpg" alt="Lakeside silhouette"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/corgi.jpg" alt="Corgi"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/pelicans.jpg" alt="Pelicans"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/horse-drawn-carriage.jpg" alt="Horse-drawn carriage"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/group-walk-on-the-beach.jpg" alt="Group walk on the beach"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/neon-museum-exhibit.jpg" alt="Neon museum exhibit"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/ferris-wheel.jpg" alt="Ferris wheel"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/sunset-over-the-lake.jpg" alt="Sunset over the lake"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" src="assets/images/chocolate-shop-switzerland.jpg" alt="Chocolate shop, Switzerland"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="430" height="391" src="assets/images/walking-down-a-spiral-staircase.jpg" alt="Walking down a spiral staircase"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/ski-resort-switzerland.jpg" alt="Ski resort, Switzerland"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="909" height="614" src="assets/images/riverside-town-at-dusk-switzerland.jpg" alt="Riverside town at dusk, Switzerland"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/lakeside-silhouette.jpg" alt="Lakeside silhouette"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/corgi.jpg" alt="Corgi"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/pelicans.jpg" alt="Pelicans"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/horse-drawn-carriage.jpg" alt="Horse-drawn carriage"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/group-walk-on-the-beach.jpg" alt="Group walk on the beach"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/neon-museum-exhibit.jpg" alt="Neon museum exhibit"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="667" height="1000" src="assets/images/ferris-wheel.jpg" alt="Ferris wheel"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/sunset-over-the-lake.jpg" alt="Sunset over the lake"></div>
+        <div class="photo-tile pixel reveal"><img loading="lazy" width="745" height="640" src="assets/images/chocolate-shop-switzerland.jpg" alt="Chocolate shop, Switzerland"></div>
       </div>
     </section>
     <footer class="frame-footer">
@@ -1646,14 +1636,14 @@
     </div>
     <section class="section" style="padding-top:0;">
       <div class="banner-hero">
-        <div class="banner-tile pixel reveal b-showoff"><img loading="lazy" src="assets/images/showoff-extraordinaire-banner.jpg" alt="Showoff Extraordinaire banner"><div class="banner-credit"><p class="banner-title">Showoff Extraordinaire</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-showoff"><img loading="lazy" width="1200" height="675" src="assets/images/showoff-extraordinaire-banner.jpg" alt="Showoff Extraordinaire banner"><div class="banner-credit"><p class="banner-title">Showoff Extraordinaire</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
       </div>
       <div class="banner-grid">
-        <div class="banner-tile pixel reveal b-aram"><img loading="lazy" src="assets/images/aram-hurricane-banner.jpg" alt="Aram Hurricane banner"><div class="banner-credit"><p class="banner-title">Aram Hurricane</p><p class="banner-meta">UNSW Riot Games Society · Tournament Banner · Photoshop</p></div></div>
-        <div class="banner-tile pixel reveal b-courtside"><img loading="lazy" src="assets/images/courtside-movie-poster.jpg" alt="Courtside movie poster"><div class="banner-credit"><p class="banner-title">Courtside</p><p class="banner-meta">Short Film Poster · Uni Project · Photoshop</p></div></div>
-        <div class="banner-tile pixel reveal b-worlds"><img loading="lazy" src="assets/images/worlds-23-watch-party-banner.jpg" alt="Worlds 23 watch party banner"><div class="banner-credit"><p class="banner-title">Worlds 23 Watch Party</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
-        <div class="banner-tile pixel reveal b-potr"><img loading="lazy" src="assets/images/potr-v-prize-spotlight-banner.jpg" alt="POTR V prize spotlight banner"><div class="banner-credit"><p class="banner-title">POTR V Prize Spotlight</p><p class="banner-meta">UNSW Riot Games Society · Prize Announcement · Photoshop</p></div></div>
-        <div class="banner-tile pixel reveal b-staborant"><img loading="lazy" data-video="assets/video/staborant-banner.mp4" data-caption="Staborant tournament banner. Click to play the promo video." src="assets/images/staborant-tournament-banner.jpg" alt="Staborant tournament banner"><div class="banner-credit"><p class="banner-title">Staborant</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-aram"><img loading="lazy" width="1200" height="720" src="assets/images/aram-hurricane-banner.jpg" alt="Aram Hurricane banner"><div class="banner-credit"><p class="banner-title">Aram Hurricane</p><p class="banner-meta">UNSW Riot Games Society · Tournament Banner · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-courtside"><img loading="lazy" width="675" height="900" src="assets/images/courtside-movie-poster.jpg" alt="Courtside movie poster"><div class="banner-credit"><p class="banner-title">Courtside</p><p class="banner-meta">Short Film Poster · Uni Project · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-worlds"><img loading="lazy" width="820" height="462" src="assets/images/worlds-23-watch-party-banner.jpg" alt="Worlds 23 watch party banner"><div class="banner-credit"><p class="banner-title">Worlds 23 Watch Party</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-potr"><img loading="lazy" width="1000" height="679" src="assets/images/potr-v-prize-spotlight-banner.jpg" alt="POTR V prize spotlight banner"><div class="banner-credit"><p class="banner-title">POTR V Prize Spotlight</p><p class="banner-meta">UNSW Riot Games Society · Prize Announcement · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-staborant"><img loading="lazy" width="809" height="435" data-video="assets/video/staborant-banner.mp4" data-caption="Staborant tournament banner. Click to play the promo video." src="assets/images/staborant-tournament-banner.jpg" alt="Staborant tournament banner"><div class="banner-credit"><p class="banner-title">Staborant</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
       </div>
     </section>
     <footer class="frame-footer">
@@ -1918,6 +1908,10 @@
             <blockquote>"Michelle was a great hands-on help, and it's clear she's a great designer. She took a limited brief and used her intuition and creativity to craft a website that went beyond what we'd originally imagined. She has a great ability to take a brief, expand on it thoughtfully, and work with feedback to make a unique and powerful result."</blockquote>
             <cite>Samuel Sunito · Managing Director, Friends n Family</cite>
           </div>
+          <div class="quote-slide">
+            <blockquote>"It was a pleasure working with Michelle. She's a thoughtful and talented designer who brings a strong eye for detail and a genuine curiosity to her work. She's collaborative, open to feedback, and always willing to learn and take on new challenges. It's been great to see her confidence and skills grow."</blockquote>
+            <cite>Sri Vatsavai · Product Designer, Swipejobs</cite>
+          </div>
         </div>
         <div class="screen-carousel-nav">
           <button type="button" class="screen-arrow quote-prev" aria-label="Previous quote">←</button>
@@ -1925,6 +1919,7 @@
             <button type="button" class="quote-dot is-active" data-index="0" aria-label="Quote 1"></button>
             <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
             <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
+            <button type="button" class="quote-dot" data-index="3" aria-label="Quote 4"></button>
           </div>
           <button type="button" class="screen-arrow quote-next" aria-label="Next quote">→</button>
         </div>
@@ -2158,32 +2153,6 @@
     start();
   });
 
-  document.querySelectorAll('.screen-carousel').forEach(function (carousel) {
-    var slides = carousel.querySelectorAll('.screen-slide');
-    var dots = carousel.querySelectorAll('.screen-dot');
-    var prevBtn = carousel.querySelector('.screen-prev');
-    var nextBtn = carousel.querySelector('.screen-next');
-    var current = 0;
-    var timer;
-    function show(index) {
-      current = (index + slides.length) % slides.length;
-      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === current); });
-      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
-    }
-    function next() { show(current + 1); }
-    function start() { if (slides.length > 1) timer = setInterval(next, 2000); }
-    function stop() { clearInterval(timer); }
-    if (prevBtn) prevBtn.addEventListener('click', function () { show(current - 1); stop(); start(); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { show(current + 1); stop(); start(); });
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () { show(parseInt(dot.dataset.index, 10)); stop(); start(); });
-    });
-    carousel.addEventListener('mouseenter', stop);
-    carousel.addEventListener('mouseleave', start);
-    start();
-  });
-
-
   var spriteShapes = [
     '<svg viewBox="0 0 24 24" width="10"><circle cx="12" cy="12" r="6" fill="currentColor"/></svg>',
     '<svg viewBox="0 0 24 24" width="11"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
@@ -2209,7 +2178,7 @@
   }
 
   var cursorEl = document.getElementById('game-cursor');
-  var hoverSelector = 'a, label, summary, .path-tile, .tag, .theme-switch, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-dot, .screen-slide img';
+  var hoverSelector = 'a, label, summary, .path-tile, .tag, .theme-switch, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img';
   window.addEventListener('mousemove', function (e) {
     cursorEl.style.display = 'block';
     cursorEl.style.left = e.clientX + 'px';
