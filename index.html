@@ -1,4 +1,6 @@
 <script type="text/javascript">
+  // stop mobile browsers restoring a stale scroll offset (e.g. mid-case-study) on load
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
   // Single Page Apps for GitHub Pages: restore the real path after the 404.html redirect
   (function (l) {
     if (l.search[1] === '/') {
@@ -1628,8 +1630,8 @@
       </div>
       <div class="banner-grid">
         <div class="banner-tile pixel reveal b-aram"><img loading="lazy" width="1200" height="720" src="assets/images/aram-hurricane-banner.jpg" alt="Aram Hurricane banner"><div class="banner-credit"><p class="banner-title">Aram Hurricane</p><p class="banner-meta">UNSW Riot Games Society · Tournament Banner · Photoshop</p></div></div>
-        <div class="banner-tile pixel reveal b-worlds"><img loading="lazy" width="820" height="462" src="assets/images/worlds-23-watch-party-banner.jpg" alt="Worlds 23 watch party banner"><div class="banner-credit"><p class="banner-title">Worlds 23 Watch Party</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
         <div class="banner-tile pixel reveal b-courtside"><img loading="lazy" width="675" height="900" src="assets/images/courtside-movie-poster.jpg" alt="Courtside movie poster"><div class="banner-credit"><p class="banner-title">Courtside</p><p class="banner-meta">Short Film Poster · Uni Project · Photoshop</p></div></div>
+        <div class="banner-tile pixel reveal b-worlds"><img loading="lazy" width="820" height="462" src="assets/images/worlds-23-watch-party-banner.jpg" alt="Worlds 23 watch party banner"><div class="banner-credit"><p class="banner-title">Worlds 23 Watch Party</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
         <div class="banner-tile pixel reveal b-potr"><img loading="lazy" width="1000" height="679" src="assets/images/potr-v-prize-spotlight-banner.jpg" alt="POTR V prize spotlight banner"><div class="banner-credit"><p class="banner-title">POTR V Prize Spotlight</p><p class="banner-meta">UNSW Riot Games Society · Prize Announcement · Photoshop</p></div></div>
         <div class="banner-tile pixel reveal b-staborant"><img loading="lazy" width="809" height="435" data-video="assets/video/staborant-banner.mp4" data-caption="Staborant tournament banner. Click to play the promo video." src="assets/images/staborant-tournament-banner.jpg" alt="Staborant tournament banner"><div class="banner-credit"><p class="banner-title">Staborant</p><p class="banner-meta">UNSW Riot Games Society · Event Promo · Photoshop</p></div></div>
       </div>
@@ -1955,6 +1957,10 @@
       if (el && !el.checked) { el.checked = true; window.scrollTo(0, 0); }
     }
     applyPath();
+    // if the URL still carries an in-page anchor (e.g. a bookmarked/shared "#see-solution"
+    // link, or the "scroll to continue" cue), drop it and land at the top on fresh loads
+    if (location.hash) { history.replaceState(null, '', location.pathname); }
+    window.scrollTo(0, 0);
     window.addEventListener('popstate', applyPath);
 
     document.querySelectorAll('input[name="page"]').forEach(function (radio) {
@@ -1969,6 +1975,17 @@
       });
     });
   })();
+
+  // in-page "scroll to" links: scroll smoothly without writing a #hash into the URL,
+  // so reloading or reopening a shared link never lands mid-page instead of at the top
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.getElementById(a.getAttribute('href').slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
   // image shimmer: swap the loading shimmer for the real image on load, or keep shimmering quietly if it fails
   (function () {
