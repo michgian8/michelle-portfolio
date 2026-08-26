@@ -233,7 +233,7 @@
   .screen-filmstrip-track { display: flex; align-items: flex-start; width: max-content; animation: filmstrip-pan linear infinite; }
   @keyframes filmstrip-pan { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .screen-filmstrip-track { animation: none; } }
-  .screen-slide { flex: 0 0 auto; width: 300px; margin-right: 16px; text-align: center; }
+  .screen-slide { flex: 0 0 auto; width: 300px; margin-right: 8px; text-align: center; }
   .screen-slide img {
     width: 300px; height: 538px; object-fit: contain; background: var(--bg);
     display: block; cursor: none;
@@ -375,9 +375,10 @@
   }
   .lightbox-close:hover { border-color: #F2F2F0; }
   .media-placeholder-note {
-    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    font-size: 13px; font-style: italic; color: var(--ink-soft);
-    text-align: center; margin: 16px 0 30px; display: block;
+    font-family: var(--label-font); font-size: 13px; letter-spacing: 0.02em; color: var(--ink-soft);
+    text-align: center; margin: 16px auto 30px; display: block; width: fit-content;
+    background: color-mix(in srgb, var(--ink) 5%, var(--bg)); border: 1px solid var(--border);
+    border-radius: 999px; padding: 8px 20px;
   }
 
   /* ---- nav ---- */
@@ -1388,7 +1389,7 @@
         <p>Worked directly with engineering to handle <strong>unusual shift patterns</strong> before they became support issues.</p>
       </div>
     </div>
-    <div class="case-wide-head reveal"><p class="media-placeholder-note">Screens shown are illustrative. Actual product UI is confidential.</p></div>
+    <div class="case-wide-head reveal"><p class="media-placeholder-note">Actual product screens can't be shown here due to confidentiality.</p></div>
     <div class="case-section reveal">
       <h3>Outcomes &amp; Retrospective</h3>
       <p>20+ designs shipped or in development, contributing directly to a product used by workers and clients across two countries.</p>
