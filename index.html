@@ -181,22 +181,13 @@
   .case-problem-cta:hover { transform: translateY(-2px); }
 
   .case-highlight-row { max-width: 1180px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .case-highlight { border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; }
-  .case-highlight h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; margin: 2px 0 0; }
-  .case-highlight p { font-size: 13.5px; line-height: 1.55; margin: 0; }
-  .case-highlight p strong { font-weight: 700; }
-  .case-highlight--lavender { background: #E8E4F5; }
-  .case-highlight--lavender h3 { color: #2E2A4A; }
-  .case-highlight--lavender p { color: #453F68; }
-  .case-highlight--lavender p strong { color: #241F3D; }
-  .case-highlight--sky { background: #DFEEF7; }
-  .case-highlight--sky h3 { color: #1B3A4B; }
-  .case-highlight--sky p { color: #305A6E; }
-  .case-highlight--sky p strong { color: #16303D; }
-  .case-highlight--peach { background: #FBE8DD; }
-  .case-highlight--peach h3 { color: #5A2E1C; }
-  .case-highlight--peach p { color: #7C4830; }
-  .case-highlight--peach p strong { color: #472315; }
+  .case-highlight {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px 24px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .case-highlight h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 15.5px; letter-spacing: 0.02em; margin: 2px 0 0; color: var(--ink); }
+  .case-highlight p { font-size: 15.5px; line-height: 1.6; margin: 0; color: var(--ink-soft); }
+  .case-highlight p strong { font-weight: 700; color: var(--ink); }
   @media (max-width: 760px) { .case-highlight-row { grid-template-columns: 1fr; padding: 0 24px; } }
 
   .case-section { max-width: 1180px; margin: 0 auto; padding: 0 56px 56px; }
@@ -210,9 +201,16 @@
   .case-wide-head { max-width: 1180px; margin: 0 auto; padding: 0 56px; margin-bottom: 26px; }
   .case-wide-head h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0; }
   .case-wide-head p { color: var(--ink-soft); font-size: 15.5px; line-height: 1.7; margin: 10px 0 0; }
-  .case-insights-grid { max-width: 1180px; margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .case-insight .insight-num { font-family: var(--label-font); font-size: 13px; color: var(--accent-2); letter-spacing: 0.05em; margin: 0 0 10px; display: block; }
-  .case-insight p { font-size: 14.5px; line-height: 1.55; color: var(--ink); margin: 0; }
+  .case-insights-grid { max-width: 1180px; margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .case-insight {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px 22px;
+  }
+  .case-insight .insight-num {
+    font-family: var(--heading-font); font-weight: 700; font-size: 26px; color: var(--border);
+    letter-spacing: 0.02em; margin: 0 0 12px; display: block;
+  }
+  .case-insight p { font-size: 15.5px; line-height: 1.6; color: var(--ink); margin: 0; }
   @media (max-width: 760px) { .case-insights-grid { grid-template-columns: 1fr 1fr; padding: 0 24px; } }
 
   .case-opportunity-list { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -1059,15 +1057,15 @@
     </div>
     <div class="case-wide-head reveal"><h3>The Solution</h3></div>
     <div class="case-highlight-row reveal" id="canopy-solution">
-      <div class="case-highlight case-highlight--lavender">
+      <div class="case-highlight">
         <h3>Personal Trees, Not Profiles</h3>
         <p>A short personality quiz grows your <strong>"tree"</strong>, a gentler, low-stakes way to introduce yourself before a word is exchanged.</p>
       </div>
-      <div class="case-highlight case-highlight--sky">
+      <div class="case-highlight">
         <h3>Booking, Without the Awkwardness</h3>
         <p>Pick a time, confirm a location, done. Small, clear decisions that <strong>lower the barrier</strong> to actually pressing "book."</p>
       </div>
-      <div class="case-highlight case-highlight--peach">
+      <div class="case-highlight">
         <h3>An AI Assistant That Listens</h3>
         <p>After a meeting, the assistant <strong>summarises key takeaways</strong> so students can stay present instead of taking notes.</p>
       </div>
@@ -1090,7 +1088,7 @@
     </div>
     <div class="case-section reveal">
       <h3>Outcomes &amp; Retrospective</h3>
-      <p>Canopy was recognised as Runner-Up at PIP25C2 🌳, successfully addressing barriers to student–tutor connection through personal trees, streamlined booking, and AI-assisted reflection.</p>
+      <p>Canopy was recognised as Runner-Up at PIP25C2, successfully addressing barriers to student–tutor connection through personal trees, streamlined booking, and AI-assisted reflection.</p>
       <ul class="case-outcomes-list">
         <li><strong>Validated solution</strong>Addressed barriers to student–tutor connection with features like personalised trees, streamlined booking, and AI reflections.</li>
         <li><strong>Impact potential</strong>Designed to make mentorship easier, more meaningful, and measurable for both students and tutors.</li>
@@ -1157,15 +1155,15 @@
     </div>
     <div class="case-wide-head reveal"><h3>Solution</h3></div>
     <div class="case-highlight-row reveal" id="fnf-solution">
-      <div class="case-highlight case-highlight--lavender">
+      <div class="case-highlight">
         <h3>Quiet Luxury, Not Loud Wealth</h3>
         <p>A visual language built on restraint: <strong>clean lines and premium imagery</strong> that communicate legacy and intimacy without ever feeling flashy.</p>
       </div>
-      <div class="case-highlight case-highlight--sky">
+      <div class="case-highlight">
         <h3>Black &amp; White, On Purpose</h3>
         <p>A raw, minimal aesthetic that balances <strong>sophistication with timeless elegance</strong>, honouring both heritage and the future.</p>
       </div>
-      <div class="case-highlight case-highlight--peach">
+      <div class="case-highlight">
         <h3>Built Through Direct Collaboration</h3>
         <p>Iterative feedback sessions with the founder shaped the final direction, keeping <strong>authentic connection</strong> at the core of every decision.</p>
       </div>
@@ -1378,15 +1376,15 @@
     </div>
     <div class="case-wide-head reveal"><h3>Solution</h3></div>
     <div class="case-highlight-row reveal" id="scheduling-solution">
-      <div class="case-highlight case-highlight--lavender">
+      <div class="case-highlight">
         <h3>Desktop &amp; App Parity</h3>
         <p>Scheduling features designed <strong>consistently across web and mobile</strong>, so workers and clients get the same experience wherever they log in.</p>
       </div>
-      <div class="case-highlight case-highlight--sky">
+      <div class="case-highlight">
         <h3>Compliance-Aware Flexibility</h3>
         <p>Configurable rules that adapt to <strong>US and UK labour requirements</strong> without adding friction for the people scheduling shifts.</p>
       </div>
-      <div class="case-highlight case-highlight--peach">
+      <div class="case-highlight">
         <h3>Edge-Case Coverage</h3>
         <p>Worked directly with engineering to handle <strong>unusual shift patterns</strong> before they became support issues.</p>
       </div>
