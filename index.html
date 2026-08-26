@@ -236,14 +236,10 @@
   .screen-filmstrip:hover .screen-filmstrip-track { animation-play-state: paused; }
   @keyframes filmstrip-pan { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .screen-filmstrip-track { animation: none; } }
-  .screen-slide { flex: 0 0 auto; width: 380px; margin-right: 24px; text-align: center; }
+  .screen-slide { flex: 0 0 auto; width: 300px; margin-right: 16px; text-align: center; }
   .screen-slide img {
-    width: 380px; height: auto;
+    width: 300px; height: 538px; object-fit: contain; background: var(--bg);
     display: block; cursor: none;
-  }
-  /* Friends n Family screens: all shown at the Opportunities screen's height, letterboxed (not cropped) */
-  .page-friendsnfamily .screen-slide img {
-    height: 681px; object-fit: contain; background: var(--bg);
   }
   .screen-caption {
     margin-top: 18px; font-family: var(--label-font); font-size: 14px; color: var(--ink-soft);
@@ -1028,18 +1024,18 @@
     </div>
     <div class="screen-filmstrip reveal">
       <div class="screen-filmstrip-track" style="animation-duration: 40s">
-      <div class="screen-slide"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="Canopy onboarding screen"><p class="screen-caption">Onboarding</p></div>
-      <div class="screen-slide"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt="Student or tutor role selection"><p class="screen-caption">Choose your role</p></div>
-      <div class="screen-slide"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt="Tree personality result screen"><p class="screen-caption">Meet your tree</p></div>
-      <div class="screen-slide"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt="Low-pressure meeting booking screen"><p class="screen-caption">Book a meeting</p></div>
-      <div class="screen-slide"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt="Booking success screen"><p class="screen-caption">Booking confirmed</p></div>
-      <div class="screen-slide"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt="AI meeting assistant summary screen"><p class="screen-caption">AI meeting summary</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt=""><p class="screen-caption">Onboarding</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt=""><p class="screen-caption">Choose your role</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt=""><p class="screen-caption">Meet your tree</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt=""><p class="screen-caption">Book a meeting</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt=""><p class="screen-caption">Booking confirmed</p></div>
-      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt=""><p class="screen-caption">AI meeting summary</p></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="Canopy onboarding screen"></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt="Student or tutor role selection"></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt="Tree personality result screen"></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt="Low-pressure meeting booking screen"></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt="Booking success screen"></div>
+      <div class="screen-slide"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt="AI meeting assistant summary screen"></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt=""></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt=""></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt=""></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/low-pressure-meeting-booking-screen.jpg" alt=""></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/booking-success-screen.jpg" alt=""></div>
+      <div class="screen-slide" aria-hidden="true"><img loading="lazy" src="assets/images/ai-meeting-assistant-summary-screen.jpg" alt=""></div>
       </div>
     </div>
     <div class="case-section reveal">
