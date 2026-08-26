@@ -625,26 +625,39 @@
   .path-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
   .path-tile {
     position: relative; background: var(--surface); border: 2px solid var(--border);
-    padding: 39px 15px 27px; text-align: center; overflow: hidden; text-decoration: none;
+    padding: 22px 12px 16px; text-align: center; overflow: visible; text-decoration: none;
     transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; z-index: 1;
   }
   .path-tile:hover { border-color: var(--accent); transform: translateY(-6px) scale(1.045); box-shadow: var(--shadow); z-index: 3; }
   .path-tile .path-icon {
-    margin: 0 auto 18px; width: 84px; height: 84px; color: var(--ink);
+    margin: 0 auto 12px; width: 56px; height: 56px; color: var(--ink);
     display: flex; align-items: center; justify-content: center;
     box-sizing: border-box;
     transition: transform .2s ease;
   }
-  .path-tile .path-icon svg { width: 32px; height: 32px; display: block; }
+  .path-tile .path-icon svg { width: 26px; height: 26px; display: block; }
   .path-tile:hover .path-icon { transform: scale(1.08); }
-  .path-tile .path-label { font-family: var(--heading-font); font-size: 16px; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--ink); }
+  .path-tile .path-label { font-family: var(--heading-font); font-size: 14px; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--ink); }
   .path-tile .path-arrow {
-    display: block; margin-top: 10px; font-family: var(--label-font); font-size: 14px; letter-spacing: 0.05em;
+    display: block; margin-top: 8px; font-family: var(--label-font); font-size: 13px; letter-spacing: 0.05em;
     color: var(--ink-soft); text-transform: uppercase;
     opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease;
   }
   .path-tile:hover .path-arrow { opacity: 1; transform: translateY(0); color: var(--accent); }
   .path-tile--ux:hover .path-arrow, .path-tile--video:hover .path-arrow, .path-tile--photo:hover .path-arrow, .path-tile--graphic:hover .path-arrow { color: var(--ink); }
+
+  /* Sydney-style hover fan: a couple of real work images peek out from behind the tile on hover */
+  .path-fan { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .path-fan-card {
+    position: absolute; top: 14px; left: 14px; width: 64px; height: 82px; object-fit: cover;
+    border-radius: 6px; background: var(--surface); box-shadow: var(--shadow);
+    opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.7);
+    transition: transform .4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity .25s ease;
+  }
+  .path-tile:hover .path-fan-card { opacity: 1; }
+  .path-tile:hover .path-fan-card--1 { transform: translate(-22px, -16px) rotate(-11deg) scale(1); }
+  .path-tile:hover .path-fan-card--2 { transform: translate(-10px, -26px) rotate(7deg) scale(1); transition-delay: .05s; }
+  @media (prefers-reduced-motion: reduce) { .path-fan-card { transition: none; } }
 
   .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
   .ux-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
@@ -848,10 +861,34 @@
     <section class="section">
       <div class="section-head"><span class="index">02</span><h3>More Work</h3><span class="rule"></span></div>
       <div class="path-grid reveal">
-        <label for="page-ux" class="path-tile pixel path-tile--ux"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 8-6 2-2 6-6-16z"/></svg></div><div class="path-label">UX</div><span class="path-arrow">view →</span></label>
-        <label for="page-video" class="path-tile pixel path-tile--video"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div><div class="path-label">Videography</div><span class="path-arrow">view →</span></label>
-        <label for="page-photo" class="path-tile pixel path-tile--photo"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/></svg></div><div class="path-label">Photography</div><span class="path-arrow">view →</span></label>
-        <label for="page-graphic" class="path-tile pixel path-tile--graphic"><div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="1.5"/><circle cx="16" cy="16" r="5"/></svg></div><div class="path-label">Graphic Design</div><span class="path-arrow">view →</span></label>
+        <label for="page-ux" class="path-tile pixel path-tile--ux">
+          <div class="path-fan" aria-hidden="true">
+            <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/friends-n-family-website-mockup.jpg" alt="">
+            <img class="path-fan-card path-fan-card--2" loading="lazy" src="assets/images/canopy-app-screens.png" alt="">
+          </div>
+          <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 8-6 2-2 6-6-16z"/></svg></div><div class="path-label">UX</div><span class="path-arrow">view →</span>
+        </label>
+        <label for="page-video" class="path-tile pixel path-tile--video">
+          <div class="path-fan" aria-hidden="true">
+            <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/courtside-thumbnail.jpg" alt="">
+            <img class="path-fan-card path-fan-card--2" loading="lazy" src="assets/images/last-shot-valorant-montage-thumbnail.jpg" alt="">
+          </div>
+          <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div><div class="path-label">Videography</div><span class="path-arrow">view →</span>
+        </label>
+        <label for="page-photo" class="path-tile pixel path-tile--photo">
+          <div class="path-fan" aria-hidden="true">
+            <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/ski-resort-switzerland.jpg" alt="">
+            <img class="path-fan-card path-fan-card--2" loading="lazy" src="assets/images/pelicans.jpg" alt="">
+          </div>
+          <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/></svg></div><div class="path-label">Photography</div><span class="path-arrow">view →</span>
+        </label>
+        <label for="page-graphic" class="path-tile pixel path-tile--graphic">
+          <div class="path-fan" aria-hidden="true">
+            <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/aram-hurricane-banner.jpg" alt="">
+            <img class="path-fan-card path-fan-card--2" loading="lazy" src="assets/images/courtside-movie-poster.jpg" alt="">
+          </div>
+          <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="1.5"/><circle cx="16" cy="16" r="5"/></svg></div><div class="path-label">Graphic Design</div><span class="path-arrow">view →</span>
+        </label>
       </div>
     </section>
 
