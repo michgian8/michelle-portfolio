@@ -149,13 +149,7 @@
   .case-hero .eyebrow-row { display: flex; align-items: baseline; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .case-hero .eyebrow-row .tag-plain { font-family: var(--label-font); font-size: 12px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--ink-soft); }
   .case-hero .eyebrow-row .badge { font-family: var(--label-font); font-size: 12px; font-weight: 700; letter-spacing: var(--label-tracking); text-transform: uppercase; color: var(--accent-ink); background: var(--accent); padding: 4px 10px; }
-  .case-achievement-badge {
-    display: inline-block; margin: 0 0 18px;
-    font-family: var(--label-font); font-size: 12px; font-weight: 700; letter-spacing: var(--label-tracking);
-    text-transform: uppercase; color: var(--accent-ink); background: var(--accent);
-    padding: 6px 16px; border-radius: 999px;
-  }
-  .case-hero h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(32px, 5vw, 48px); margin: 0 0 18px; }
+  .case-hero h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(32px, 5vw, 48px); margin: 0 0 8px; }
   .case-hero p.case-lede { color: var(--ink); max-width: 68ch; line-height: 1.7; font-size: 16px; margin: 0 auto 36px; }
   .case-hero-img { max-width: 1000px; margin: 0 auto 64px; padding: 0 56px; }
   .case-hero-img img { width: 100%; height: auto; display: block; }
@@ -260,6 +254,25 @@
   .case-team-photo { max-width: 1180px; margin: 0 auto 20px; padding: 0 56px; }
   .case-team-photo img { width: 100%; height: auto; display: block; border-radius: 12px; }
   .case-team-caption { max-width: 1180px; margin: 0 auto 60px; padding: 0 56px; color: var(--ink-soft); font-size: 14px; text-align: center; }
+
+  /* more case studies, shown at the end of each case study page */
+  .more-cs-head { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .more-cs-grid { max-width: 1180px; margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .more-cs-card {
+    display: block; text-decoration: none; color: inherit; cursor: none;
+    background: var(--surface); border: 2px solid var(--border); border-radius: 14px; overflow: hidden;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .more-cs-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow); }
+  .more-cs-thumb { aspect-ratio: 16/10; background: #0A0A0A; overflow: hidden; }
+  .more-cs-thumb img, .more-cs-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .more-cs-body { padding: 16px 18px; }
+  .more-cs-body h4 { font-family: var(--heading-font); text-transform: uppercase; font-size: 16px; margin: 0 0 8px; color: var(--ink); }
+  .more-cs-body p { font-size: 13.5px; line-height: 1.5; color: var(--ink); margin: 0; }
+  @media (max-width: 760px) {
+    .more-cs-grid { padding: 0 24px; grid-template-columns: 1fr; }
+    .more-cs-head { padding-left: 24px; padding-right: 24px; margin-top: 48px; padding-top: 32px; }
+  }
 
   .case-video-embed { max-width: 900px; margin: 0 auto 48px; padding: 0 56px; }
   .case-video-embed .embed-frame { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: #000; }
@@ -1013,7 +1026,6 @@
       <label for="page-ux" class="back-link">← Back to UX Work</label>
       <h2>Canopy</h2>
       <div class="eyebrow-row">
-        <span class="tag-plain">UX/UI Design · User Research</span>
         <span class="tag-plain">June – August 2025</span>
         <span class="badge">PIP25C2 Runner-Up</span>
       </div>
@@ -1119,6 +1131,17 @@
       <img loading="lazy" src="assets/images/the-canopy-team-at-pip25c2.jpg" alt="The Canopy team at PIP25C2">
     </div>
     <p class="case-team-caption">The Canopy team at PIP25C2, second place, runner-up.</p>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-friendsnfamily" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/friends-n-family-website-mockup.jpg" alt="Friends n Family website mockup"></div>
+        <div class="more-cs-body"><h4>Friends n Family</h4><p>A quiet-luxury brand site for a fund manager, pivoted mid-project to a black-and-white minimalist direction.</p></div>
+      </label>
+      <label for="page-schedulingfeatures" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/scheduling-features-thumbnail.png" alt="Scheduling Features mockup"></div>
+        <div class="more-cs-body"><h4>Scheduling Features</h4><p>Configurable shift scheduling for a US/UK recruiting platform, balancing complex rules with a friction-free experience.</p></div>
+      </label>
+    </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
       <span>michellesunito@gmail.com</span>
@@ -1135,7 +1158,6 @@
       <label for="page-ux" class="back-link">← Back to UX Work</label>
       <h2>Friends n Family</h2>
       <div class="eyebrow-row">
-        <span class="tag-plain">UI Design</span>
         <span class="tag-plain">September 2025</span>
       </div>
       <p class="case-lede">A digital experience for Friends N Family, a fund management business reimagining wealth as a vehicle for legacy and community, bridging traditional finance with soulful, relationship-centred investing.</p>
@@ -1207,6 +1229,17 @@
         <li><strong>Lessons learned</strong>The importance of collaborative iteration and staying flexible when translating brand essence into digital form, and how working directly with stakeholders enables quick pivots that keep design aligned with vision.</li>
         <li><strong>Project status</strong>Currently on hold at the founder's request. The designs shown represent the initial phase, establishing the visual foundation and core pages before pausing for strategic timing.</li>
       </ul>
+    </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-canopy" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
+        <div class="more-cs-body"><h4>Canopy</h4><p>A safe, low-pressure way for students and tutors to connect, with personal trees and easy booking.</p></div>
+      </label>
+      <label for="page-schedulingfeatures" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/scheduling-features-thumbnail.png" alt="Scheduling Features mockup"></div>
+        <div class="more-cs-body"><h4>Scheduling Features</h4><p>Configurable shift scheduling for a US/UK recruiting platform, balancing complex rules with a friction-free experience.</p></div>
+      </label>
     </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1351,7 +1384,6 @@
       <label for="page-ux" class="back-link">← Back to UX Work</label>
       <h2>Scheduling Features</h2>
       <div class="eyebrow-row">
-        <span class="tag-plain">Product Design · Cross-fn Collaboration</span>
         <span class="tag-plain">Jan – Jul 2026</span>
       </div>
       <p class="case-lede">Configurable worker scheduling for complex shift patterns on swipejobs, a SaaS recruiting platform operating across the US and UK, designed across desktop and app.</p>
@@ -1419,6 +1451,17 @@
         <li><strong>Lessons learned</strong>Using Claude to stress-test ideas before handoff meaningfully cut down on late-stage edge-case surprises.</li>
       </ul>
     </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-canopy" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
+        <div class="more-cs-body"><h4>Canopy</h4><p>A safe, low-pressure way for students and tutors to connect, with personal trees and easy booking.</p></div>
+      </label>
+      <label for="page-friendsnfamily" class="more-cs-card">
+        <div class="more-cs-thumb"><img loading="lazy" src="assets/images/friends-n-family-website-mockup.jpg" alt="Friends n Family website mockup"></div>
+        <div class="more-cs-body"><h4>Friends n Family</h4><p>A quiet-luxury brand site for a fund manager, pivoted mid-project to a black-and-white minimalist direction.</p></div>
+      </label>
+    </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
       <span>michellesunito@gmail.com</span>
@@ -1467,6 +1510,21 @@
         <li><strong>Why it mattered</strong>A chance to push my motion design skills while celebrating the creative work of OTV and its community.</li>
       </ul>
     </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-deep" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/deep-preview.mp4" aria-label="Deep preview"></video></div>
+        <div class="more-cs-body"><h4>Deep</h4><p>A short documentary on Paralympic swimmer Chloe Osborn, made with Scarlett Brouner and Imogen Mabin.</p></div>
+      </label>
+      <label for="page-ogc" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/ogc-preview.mp4" aria-label="One Global Capital Shorts preview"></video></div>
+        <div class="more-cs-body"><h4>One Global Capital Shorts</h4><p>Short-form video for a Sydney property firm, covering major developments and brand storytelling.</p></div>
+      </label>
+      <label for="page-unswfood" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/unswfood-preview.mp4" aria-label="Feeling Hungry at UNSW preview"></video></div>
+        <div class="more-cs-body"><h4>Feeling Hungry at UNSW?</h4><p>Two campus food promos for UNSW Retail, translating stakeholder briefs into trend-driven social content.</p></div>
+      </label>
+    </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
       <span>michellesunito@gmail.com</span>
@@ -1481,10 +1539,10 @@
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
-      <span class="case-achievement-badge">1st Place, Heat 3 · People's Choice</span>
       <h2>Deep</h2>
       <div class="eyebrow-row">
         <span class="tag-plain">2024</span>
+        <span class="badge">1st Place, Heat 3 · People's Choice</span>
       </div>
       <p class="case-lede">A short documentary telling the story of Chloe Osborn, a Paralympic swimmer, exploring her challenges and achievements both in and out of the pool. Made in collaboration with Scarlett Brouner and Imogen Mabin.</p>
     </div>
@@ -1519,6 +1577,21 @@
         <li><strong>Collaborative process</strong>Multiple iterations as a three-person team, continuously refining structure, pacing, and sound design to best reflect Chloe's story.</li>
         <li><strong>Lessons learned</strong>Shaping a documentary's emotional tone through sound and pacing showed me how much a story rides on what you hear, not just what you see.</li>
       </ul>
+    </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-neverhaveiever" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
+        <div class="more-cs-body"><h4>Never Have I Ever</h4><p>Motion typography synced to an original K-pop-inspired track, made for an OfflineTV editing competition.</p></div>
+      </label>
+      <label for="page-ogc" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/ogc-preview.mp4" aria-label="One Global Capital Shorts preview"></video></div>
+        <div class="more-cs-body"><h4>One Global Capital Shorts</h4><p>Short-form video for a Sydney property firm, covering major developments and brand storytelling.</p></div>
+      </label>
+      <label for="page-unswfood" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/unswfood-preview.mp4" aria-label="Feeling Hungry at UNSW preview"></video></div>
+        <div class="more-cs-body"><h4>Feeling Hungry at UNSW?</h4><p>Two campus food promos for UNSW Retail, translating stakeholder briefs into trend-driven social content.</p></div>
+      </label>
     </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1584,6 +1657,21 @@
         <li><strong>Ongoing partnership</strong>Producing content for One Global Capital since 2024, reflecting a sustained working relationship built on trust in the creative direction.</li>
       </ul>
     </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-neverhaveiever" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
+        <div class="more-cs-body"><h4>Never Have I Ever</h4><p>Motion typography synced to an original K-pop-inspired track, made for an OfflineTV editing competition.</p></div>
+      </label>
+      <label for="page-deep" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/deep-preview.mp4" aria-label="Deep preview"></video></div>
+        <div class="more-cs-body"><h4>Deep</h4><p>A short documentary on Paralympic swimmer Chloe Osborn, made with Scarlett Brouner and Imogen Mabin.</p></div>
+      </label>
+      <label for="page-unswfood" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/unswfood-preview.mp4" aria-label="Feeling Hungry at UNSW preview"></video></div>
+        <div class="more-cs-body"><h4>Feeling Hungry at UNSW?</h4><p>Two campus food promos for UNSW Retail, translating stakeholder briefs into trend-driven social content.</p></div>
+      </label>
+    </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
       <span>michellesunito@gmail.com</span>
@@ -1636,6 +1724,21 @@
       <h3>My Role &amp; Process</h3>
       <p>I started by developing storyboards based on input from my manager, Marion, and her vision for the campaign. The two projects were the <strong>Don't Blink Ad</strong>, a fast-paced, typography-driven video inspired by Apple's "Don't Blink," and <strong>UNSW Foods Wrapped</strong>, a playful take on Spotify Wrapped highlighting the most popular campus food spots in a year-in-review style.</p>
       <p>Both videos were produced using Adobe After Effects and Premiere Pro. These pieces went through multiple drafts, with regular feedback sessions and email correspondence to refine the visuals and messaging.</p>
+    </div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="more-cs-grid reveal">
+      <label for="page-neverhaveiever" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
+        <div class="more-cs-body"><h4>Never Have I Ever</h4><p>Motion typography synced to an original K-pop-inspired track, made for an OfflineTV editing competition.</p></div>
+      </label>
+      <label for="page-deep" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/deep-preview.mp4" aria-label="Deep preview"></video></div>
+        <div class="more-cs-body"><h4>Deep</h4><p>A short documentary on Paralympic swimmer Chloe Osborn, made with Scarlett Brouner and Imogen Mabin.</p></div>
+      </label>
+      <label for="page-ogc" class="more-cs-card">
+        <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/ogc-preview.mp4" aria-label="One Global Capital Shorts preview"></video></div>
+        <div class="more-cs-body"><h4>One Global Capital Shorts</h4><p>Short-form video for a Sydney property firm, covering major developments and brand storytelling.</p></div>
+      </label>
     </div>
     <footer class="frame-footer">
       <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
@@ -2171,7 +2274,7 @@
   });
 
   (function () {
-    var lazyVideos = document.querySelectorAll('.card-thumb--video video[data-src], .ig-video-link video[data-src]');
+    var lazyVideos = document.querySelectorAll('.card-thumb--video video[data-src], .ig-video-link video[data-src], .more-cs-thumb video[data-src]');
     if (!lazyVideos.length) return;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -2282,7 +2385,7 @@
   }
 
   var cursorEl = document.getElementById('game-cursor');
-  var hoverSelector = 'a, label, summary, .path-tile, .tag, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img';
+  var hoverSelector = 'a, label, summary, .path-tile, .tag, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img, .more-cs-card';
   window.addEventListener('mousemove', function (e) {
     cursorEl.style.display = 'block';
     cursorEl.style.left = e.clientX + 'px';
