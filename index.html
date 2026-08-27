@@ -30,6 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
+    --content-max: min(2400px, max(1600px, 85vw));
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -137,13 +138,13 @@
   .app:has(#page-schedulingfeatures:checked) .page-schedulingfeatures { display: block; }
 
   /* media gallery pages */
-  .media-head { padding: 64px 56px 40px; max-width: 1600px; margin: 0 auto; }
+  .media-head { padding: 64px 56px 40px; max-width: var(--content-max); margin: 0 auto; }
   .media-head .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 14px; }
   .media-head h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(28px, 4vw, 40px); margin: 0 0 14px; }
   .media-head p { color: var(--ink-soft); max-width: 60ch; line-height: 1.6; font-size: 16px; }
 
   /* canopy case study */
-  .case-hero { max-width: 1600px; margin: 0 auto; padding: 56px 56px 0; text-align: center; }
+  .case-hero { max-width: var(--content-max); margin: 0 auto; padding: 56px 56px 0; text-align: center; }
   .case-hero .back-link { display: block; text-align: left; margin-bottom: 24px; font-family: var(--label-font); font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; }
   .case-hero .back-link:hover { color: var(--ink); }
   .case-hero .eyebrow-row { display: flex; align-items: baseline; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -155,7 +156,7 @@
   .case-hero-img img { width: 100%; height: auto; display: block; }
 
   /* project overview, henry-style two column */
-  .case-overview { max-width: 1600px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: 0.85fr 1.15fr; row-gap: 16px; column-gap: 48px; }
+  .case-overview { max-width: var(--content-max); margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: 0.85fr 1.15fr; row-gap: 16px; column-gap: 48px; }
   .case-overview h3 { grid-column: 1 / -1; font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0; }
   .case-overview-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .case-overview-lists .ov-label { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); margin: 0 0 10px; }
@@ -165,7 +166,7 @@
   .case-overview-text strong { color: var(--ink); font-weight: 700; }
 
   /* the problem, henry-style prominent card */
-  .case-problem-wrap { max-width: 1600px; margin: 0 auto 64px; padding: 0 56px; }
+  .case-problem-wrap { max-width: var(--content-max); margin: 0 auto 64px; padding: 0 56px; }
   .case-problem { border-radius: 10px; padding: 48px 56px; background: color-mix(in srgb, var(--ink) 6%, var(--bg)); }
   .case-problem h3 { color: var(--ink); }
   .case-problem p { color: var(--ink); }
@@ -180,7 +181,7 @@
   }
   .case-problem-cta:hover { transform: translateY(-2px); }
 
-  .case-highlight-row { max-width: 1600px; margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .case-highlight-row { max-width: var(--content-max); margin: 0 auto 56px; padding: 0 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   #scheduling-solution { margin-bottom: 10px; }
   .case-highlight {
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
@@ -191,7 +192,7 @@
   .case-highlight p strong { font-weight: 700; color: var(--ink); }
   @media (max-width: 760px) { .case-highlight-row { grid-template-columns: 1fr; padding: 0 24px; } }
 
-  .case-section { max-width: 1600px; margin: 0 auto; padding: 0 56px 56px; }
+  .case-section { max-width: var(--content-max); margin: 0 auto; padding: 0 56px 56px; }
   .case-section h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0 0 16px; }
   .case-section p { color: var(--ink); font-size: 16px; line-height: 1.75; margin: 0 0 16px; }
 
@@ -199,10 +200,10 @@
   .case-research-list li { font-size: 15px; line-height: 1.65; color: var(--ink); padding-left: 18px; border-left: 2px solid var(--border); }
   .case-research-list li strong { color: var(--ink); }
 
-  .case-wide-head { max-width: 1600px; margin: 0 auto; padding: 0 56px; margin-bottom: 26px; }
+  .case-wide-head { max-width: var(--content-max); margin: 0 auto; padding: 0 56px; margin-bottom: 26px; }
   .case-wide-head h3 { font-family: var(--heading-font); text-transform: uppercase; font-size: 20px; margin: 0; }
   .case-wide-head p { color: var(--ink); font-size: 15.5px; line-height: 1.7; margin: 10px 0 0; }
-  .case-insights-grid { max-width: 1600px; margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .case-insights-grid { max-width: var(--content-max); margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .case-insight {
     background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
     padding: 24px 22px;
@@ -217,7 +218,7 @@
   .case-opportunity-list { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   .case-opportunity-list li { font-size: 15px; line-height: 1.6; color: var(--ink); padding-left: 22px; position: relative; }
   .case-opportunity-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
-  .case-hmw { max-width: 1600px; margin: 32px auto 56px; padding: 0 56px; }
+  .case-hmw { max-width: var(--content-max); margin: 32px auto 56px; padding: 0 56px; }
   .case-hmw .hmw-label { display: block; max-width: 860px; font-family: var(--label-font); font-size: 12px; letter-spacing: 0.08em; color: var(--accent-2); text-transform: uppercase; margin-bottom: 10px; }
   .case-hmw blockquote { max-width: 860px; margin: 0; font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(20px, 3vw, 28px); line-height: 1.4; color: var(--ink); border-left: 3px solid var(--accent); padding-left: 24px; }
 
@@ -225,15 +226,16 @@
   .case-outcomes-list li { font-size: 15px; line-height: 1.6; color: var(--ink); }
   .case-outcomes-list li strong { color: var(--ink); display: block; font-family: var(--heading-font); text-transform: uppercase; font-size: 13px; letter-spacing: 0.03em; margin-bottom: 3px; }
 
-  /* screens filmstrip: continuously panning row of screenshots */
+  /* screens filmstrip: auto-pans, but the user can scroll it by hand (wheel/touch/drag);
+     auto-pan resumes a moment after they stop */
   .screen-filmstrip {
-    max-width: 1100px; margin: 0 auto 64px; overflow: hidden;
+    max-width: 1100px; margin: 0 auto 64px;
+    overflow-x: auto; overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   }
-  .screen-filmstrip-track { display: flex; align-items: flex-start; width: max-content; animation: filmstrip-pan linear infinite; }
-  @keyframes filmstrip-pan { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .screen-filmstrip-track { animation: none; } }
+  .screen-filmstrip-track { display: flex; align-items: flex-start; width: max-content; }
   .screen-slide { flex: 0 0 auto; width: 300px; margin-right: 14px; text-align: center; }
   .screen-slide img {
     width: 300px; height: 538px; object-fit: contain; background: var(--bg);
@@ -251,13 +253,13 @@
   }
   .screen-arrow:hover { border-color: var(--accent); transform: scale(1.08); }
 
-  .case-team-photo { max-width: 1600px; margin: 0 auto 20px; padding: 0 56px; }
+  .case-team-photo { max-width: var(--content-max); margin: 0 auto 20px; padding: 0 56px; }
   .case-team-photo img { width: 100%; height: auto; display: block; border-radius: 12px; }
-  .case-team-caption { max-width: 1600px; margin: 0 auto 60px; padding: 0 56px; color: var(--ink-soft); font-size: 14px; text-align: center; }
+  .case-team-caption { max-width: var(--content-max); margin: 0 auto 60px; padding: 0 56px; color: var(--ink-soft); font-size: 14px; text-align: center; }
 
   /* more case studies, shown at the end of each case study page */
   .more-cs-head { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); }
-  .more-cs-grid { max-width: 1600px; margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .more-cs-grid { max-width: var(--content-max); margin: 0 auto 64px; padding: 0 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
   .more-cs-card {
     display: block; text-decoration: none; color: inherit; cursor: none;
     background: var(--surface); border: 2px solid var(--border); border-radius: 14px; overflow: hidden;
@@ -405,7 +407,7 @@
   /* ---- nav ---- */
   nav.site-nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 26px max(56px, calc((100vw - 1600px) / 2 + 56px));
+    padding: 26px max(56px, calc((100vw - var(--content-max)) / 2 + 56px));
     border-bottom: 1px solid var(--border);
     font-family: var(--label-font);
     position: sticky; top: 0; z-index: 50; background: var(--bg);
@@ -453,7 +455,7 @@
   .hero {
     position: relative;
     display: grid; grid-template-columns: 1fr; gap: 80px;
-    padding: 100px 56px 110px; max-width: 1600px; margin: 0 auto;
+    padding: 100px 56px 110px; max-width: var(--content-max); margin: 0 auto;
     min-height: 82vh; align-content: center;
   }
 
@@ -571,7 +573,7 @@
   @media (prefers-reduced-motion: reduce) { .hero-avatar-inline::before { animation: none; } }
 
   /* ---- section shell ---- */
-  .section { padding: 0 56px 96px; max-width: 1600px; margin: 0 auto; }
+  .section { padding: 0 56px 96px; max-width: var(--content-max); margin: 0 auto; }
   .section-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 30px; }
   .section-head .index { font-family: var(--label-font); color: var(--accent); font-size: 14px; letter-spacing: var(--label-tracking); }
   .section-head h3 { font-family: var(--heading-font); text-transform: uppercase; letter-spacing: 0.04em; font-size: 18px; margin: 0; }
@@ -723,13 +725,13 @@
     .case-study-grid .card { display: block; }
   }
 
-  footer.frame-footer { padding: 44px 56px 60px; display: flex; justify-content: space-between; max-width: 1600px; margin: 0 auto; font-family: var(--label-font); font-size: 14px; color: var(--ink-soft); letter-spacing: var(--label-tracking); text-transform: uppercase; border-top: 1px solid var(--border); }
+  footer.frame-footer { padding: 44px 56px 60px; display: flex; justify-content: space-between; max-width: var(--content-max); margin: 0 auto; font-family: var(--label-font); font-size: 14px; color: var(--ink-soft); letter-spacing: var(--label-tracking); text-transform: uppercase; border-top: 1px solid var(--border); }
   footer.frame-footer a { color: var(--ink-soft); text-decoration: none; transition: color .15s ease; }
   footer.frame-footer a:hover { color: var(--accent); }
   footer.frame-footer a[target="_blank"]::after { content: "\2197"; margin-left: 4px; font-size: 13px; display: inline-block; }
 
   /* ---- resume page ---- */
-  .resume-head { padding: 64px 56px 40px; max-width: 1600px; margin: 0 auto; }
+  .resume-head { padding: 64px 56px 40px; max-width: var(--content-max); margin: 0 auto; }
   .resume-head .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 14px; }
   .resume-head h2 { font-family: var(--heading-font); text-transform: uppercase; font-size: clamp(28px, 4vw, 40px); margin: 0 0 14px; }
   .resume-head p { color: var(--ink-soft); max-width: 60ch; line-height: 1.6; font-size: 16px; }
@@ -1104,7 +1106,7 @@
       </div>
     </div>
     <div class="screen-filmstrip reveal">
-      <div class="screen-filmstrip-track" style="animation-duration: 40s">
+      <div class="screen-filmstrip-track">
       <div class="screen-slide"><img loading="lazy" src="assets/images/canopy-onboarding-screen.jpg" alt="Canopy onboarding screen"></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/student-or-tutor-role-selection.jpg" alt="Student or tutor role selection"></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/tree-personality-result-screen.jpg" alt="Tree personality result screen"></div>
@@ -1132,7 +1134,7 @@
       <img loading="lazy" src="assets/images/the-canopy-team-at-pip25c2.jpg" alt="The Canopy team at PIP25C2">
     </div>
     <p class="case-team-caption">The Canopy team at PIP25C2, second place, runner-up.</p>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-friendsnfamily" class="more-cs-card">
         <div class="more-cs-thumb"><img loading="lazy" src="assets/images/friends-n-family-website-mockup.jpg" alt="Friends n Family website mockup"></div>
@@ -1212,7 +1214,7 @@
       </div>
     </div>
     <div class="screen-filmstrip reveal">
-      <div class="screen-filmstrip-track" style="animation-duration: 28s">
+      <div class="screen-filmstrip-track">
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-homepage.jpg" alt="Friends n Family homepage"></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-philosophy-page.jpg" alt="Friends n Family philosophy page"></div>
       <div class="screen-slide"><img loading="lazy" src="assets/images/friends-n-family-opportunities-page.jpg" alt="Friends n Family opportunities page"></div>
@@ -1231,7 +1233,7 @@
         <li><strong>Project status</strong>Currently on hold at the founder's request. The designs shown represent the initial phase, establishing the visual foundation and core pages before pausing for strategic timing.</li>
       </ul>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-canopy" class="more-cs-card">
         <div class="more-cs-thumb"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
@@ -1452,7 +1454,7 @@
         <li><strong>Lessons learned</strong>Using Claude to stress-test ideas before handoff meaningfully cut down on late-stage edge-case surprises.</li>
       </ul>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-canopy" class="more-cs-card">
         <div class="more-cs-thumb"><img loading="lazy" src="assets/images/canopy-app-screens.png" alt="Canopy app screens"></div>
@@ -1511,7 +1513,7 @@
         <li><strong>Why it mattered</strong>A chance to push my motion design skills while celebrating the creative work of OTV and its community.</li>
       </ul>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-deep" class="more-cs-card">
         <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/deep-preview.mp4" aria-label="Deep preview"></video></div>
@@ -1579,7 +1581,7 @@
         <li><strong>Lessons learned</strong>Shaping a documentary's emotional tone through sound and pacing showed me how much a story rides on what you hear, not just what you see.</li>
       </ul>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-neverhaveiever" class="more-cs-card">
         <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
@@ -1658,7 +1660,7 @@
         <li><strong>Ongoing partnership</strong>Producing content for One Global Capital since 2024, reflecting a sustained working relationship built on trust in the creative direction.</li>
       </ul>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-neverhaveiever" class="more-cs-card">
         <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
@@ -1726,7 +1728,7 @@
       <p>I started by developing storyboards based on input from my manager, Marion, and her vision for the campaign. The two projects were the <strong>Don't Blink Ad</strong>, a fast-paced, typography-driven video inspired by Apple's "Don't Blink," and <strong>UNSW Foods Wrapped</strong>, a playful take on Spotify Wrapped highlighting the most popular campus food spots in a year-in-review style.</p>
       <p>Both videos were produced using Adobe After Effects and Premiere Pro. These pieces went through multiple drafts, with regular feedback sessions and email correspondence to refine the visuals and messaging.</p>
     </div>
-    <div class="case-wide-head more-cs-head reveal"><h3>More Case Studies</h3></div>
+    <div class="case-wide-head more-cs-head reveal"><h3>More Projects</h3></div>
     <div class="more-cs-grid reveal">
       <label for="page-neverhaveiever" class="more-cs-card">
         <div class="more-cs-thumb"><video muted loop playsinline preload="none" data-src="assets/video/never-have-i-ever-preview.mp4" aria-label="Never Have I Ever preview"></video></div>
@@ -2290,6 +2292,52 @@
     }, { rootMargin: '200px' });
     lazyVideos.forEach(function (video) { io.observe(video); });
   })();
+
+  // screen filmstrips: auto-pan continuously, but hand control back to the user the
+  // moment they wheel/touch/drag it, then resume auto-pan a couple seconds after they stop
+  document.querySelectorAll('.screen-filmstrip').forEach(function (strip) {
+    var track = strip.querySelector('.screen-filmstrip-track');
+    if (!track) return;
+
+    var speed = 45; // px/sec
+    var paused = false;
+    var resumeTimer = null;
+    var lastTime = null;
+
+    function loop(time) {
+      if (lastTime == null) lastTime = time;
+      var dt = (time - lastTime) / 1000;
+      lastTime = time;
+      // re-measure every frame: the page this filmstrip lives on may be display:none
+      // (hidden panels report scrollWidth 0), so a one-time measurement can get stuck at 0
+      var half = track.scrollWidth / 2;
+      if (!paused && half > 0) {
+        strip.scrollLeft += speed * dt;
+        if (strip.scrollLeft >= half) strip.scrollLeft -= half;
+      }
+      requestAnimationFrame(loop);
+    }
+
+    function pauseForInteraction() {
+      paused = true;
+      lastTime = null;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function () { paused = false; }, 1800);
+    }
+    strip.addEventListener('wheel', pauseForInteraction, { passive: true });
+    strip.addEventListener('touchstart', pauseForInteraction, { passive: true });
+    strip.addEventListener('pointerdown', pauseForInteraction);
+
+    // keep the seamless loop working during/after manual scroll too
+    strip.addEventListener('scroll', function () {
+      var half = track.scrollWidth / 2;
+      if (half <= 0) return;
+      if (strip.scrollLeft >= half) strip.scrollLeft -= half;
+      else if (strip.scrollLeft < 0) strip.scrollLeft += half;
+    });
+
+    if (!reduceMotion) requestAnimationFrame(loop);
+  });
 
   document.querySelectorAll('.quote-carousel').forEach(function (carousel) {
     var slides = carousel.querySelectorAll('.quote-slide');
