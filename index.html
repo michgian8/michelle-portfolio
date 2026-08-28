@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --content-max: min(2400px, max(1600px, 85vw));
+    --content-max: min(2050px, max(1500px, 76.5vw));
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -116,8 +116,9 @@
   img {
     background: linear-gradient(100deg, var(--surface) 30%, var(--border) 45%, var(--surface) 60%);
     background-size: 200% 100%; animation: img-shimmer 1.4s ease-in-out infinite;
+    color: transparent; /* hides the browser's broken-image icon/alt text while still loading, not just on failure */
   }
-  img.is-loaded { animation: none; background: none; }
+  img.is-loaded { animation: none; background: none; color: initial; }
   img.is-failed { color: transparent; }
   @keyframes img-shimmer { 0% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
   @media (prefers-reduced-motion: reduce) { img { animation: none; background: var(--surface); } }
@@ -474,6 +475,9 @@
     100% { opacity: 0; transform: scale(0.82) rotate(8deg); }
   }
   @media (prefers-reduced-motion: reduce) { .hero-scatter { display: none; } }
+  /* on very wide monitors the reflowed content area alone left everything looking small;
+     scale the whole hero-copy block up beyond ~1900px viewport so it matches how it reads at typical laptop widths */
+  .hero-copy { transform: scale(clamp(1, calc(100vw / 1900px), 1.5)); transform-origin: left center; }
   .hero-copy .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 18px; }
   .hero-copy .kicker.rotator { min-height: 2.8em; display: flex; align-items: flex-end; }
 
@@ -601,9 +605,23 @@
   /* card */
   .card { background: var(--surface); border: 2px solid var(--border); box-shadow: var(--shadow); padding: 29px 33px; }
   .card-thumb {
-    display: block; width: calc(100% + 66px); margin: -29px -33px 22px; background: var(--bg);
+    display: block; position: relative; width: calc(100% + 66px); margin: -29px -33px 22px; background: var(--bg);
   }
   .card-thumb img { width: 100%; height: auto; display: block; }
+  /* extends the sitewide img shimmer to wipe the whole tile too, since --canopy/--scheduling thumbs are
+     smaller than their tile (object-fit: contain) and leave the tinted padding around them un-shimmered */
+  .card-thumb::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: var(--border) linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
+    background-size: 100% 100%, 200% 100%;
+    animation: card-thumb-shimmer 1.5s ease-in-out infinite;
+  }
+  .card-thumb:has(img.is-loaded)::after, .card-thumb.card-thumb--video::after { display: none; }
+  @keyframes card-thumb-shimmer {
+    0% { background-position: 0 0, 200% 0; }
+    100% { background-position: 0 0, -200% 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .card-thumb::after { animation: none; } }
   .card-thumb.card-thumb--video { position: relative; background: #0A0A0A; aspect-ratio: 16/10; overflow: hidden; }
   .card-thumb.card-thumb--video video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .card-thumb.card-thumb--canopy {
