@@ -14,23 +14,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Michelle Sunito | Portfolio</title>
-<meta name="description" content="Portfolio of Michelle Sunito: UX/UI design, videography, photography, and graphic design work.">
+<meta name="description" content="Portfolio of Michelle Sunito: UX/UI design, videography, and graphic design work.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A0A0A'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='46' font-weight='700' fill='%23F2F2F0' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Michelle Sunito | Portfolio">
-<meta property="og:description" content="Portfolio of Michelle Sunito: UX/UI design, videography, photography, and graphic design work.">
+<meta property="og:description" content="Portfolio of Michelle Sunito: UX/UI design, videography, and graphic design work.">
 <meta property="og:url" content="https://michgian8.github.io/michelle-portfolio/">
 <meta property="og:image" content="https://michgian8.github.io/michelle-portfolio/assets/images/photo-of-michelle.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Michelle Sunito | Portfolio">
-<meta name="twitter:description" content="Portfolio of Michelle Sunito: UX/UI design, videography, photography, and graphic design work.">
+<meta name="twitter:description" content="Portfolio of Michelle Sunito: UX/UI design, videography, and graphic design work.">
 <meta name="twitter:image" content="https://michgian8.github.io/michelle-portfolio/assets/images/photo-of-michelle.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --content-max: min(2050px, max(1500px, 76.5vw));
+    --content-max: 1650px;
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -46,6 +46,9 @@
     --label-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --label-tracking: 0.08em;
   }
+  /* media queries (unlike vw inside calc()) read the true device viewport regardless of the .app zoom below,
+     so very wide monitors get a deliberately narrower column instead of edge-to-edge content */
+  @media (min-width: 2200px) { :root { --content-max: 1500px; } }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   html { scroll-behavior: smooth; }
@@ -112,7 +115,9 @@
   /* ---- hidden routing inputs ---- */
   .page-inputs { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden; }
 
-  .app { position: relative; z-index: 1; }
+  /* on very wide monitors the whole site read as small/sparse; zoom (not transform, so sticky nav still works)
+     scales everything together, calibrated so 1621px (a typical laptop width) is the unscaled baseline */
+  .app { position: relative; z-index: 1; zoom: clamp(1, calc(100vw / 1621px), 2); }
   img {
     background: linear-gradient(100deg, var(--surface) 30%, var(--border) 45%, var(--surface) 60%);
     background-size: 200% 100%; animation: img-shimmer 1.4s ease-in-out infinite;
@@ -122,11 +127,10 @@
   img.is-failed { color: transparent; }
   @keyframes img-shimmer { 0% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
   @media (prefers-reduced-motion: reduce) { img { animation: none; background: var(--surface); } }
-  .page-home, .page-resume, .page-video, .page-photo, .page-graphic, .page-about, .page-ux, .page-canopy, .page-friendsnfamily, .page-neverhaveiever, .page-deep, .page-ogc, .page-unswfood, .page-schedulingfeatures { display: none; }
+  .page-home, .page-resume, .page-video, .page-graphic, .page-about, .page-ux, .page-canopy, .page-friendsnfamily, .page-neverhaveiever, .page-deep, .page-ogc, .page-unswfood, .page-schedulingfeatures { display: none; }
   .app:has(#page-home:checked) .page-home { display: block; }
   .app:has(#page-resume:checked) .page-resume { display: block; }
   .app:has(#page-video:checked) .page-video { display: block; }
-  .app:has(#page-photo:checked) .page-photo { display: block; }
   .app:has(#page-graphic:checked) .page-graphic { display: block; }
   .app:has(#page-about:checked) .page-about { display: block; }
   .app:has(#page-ux:checked) .page-ux { display: block; }
@@ -351,14 +355,6 @@
   .video-card-body h4 { font-family: var(--heading-font); text-transform: uppercase; font-size: 15px; margin: 0 0 6px; }
   .video-card-body p { color: var(--ink-soft); font-size: 16px; margin: 0; }
 
-  .photo-grid { columns: 3; column-gap: 20px; }
-  .photo-tile {
-    background: var(--surface); border-radius: 16px; overflow: hidden;
-    cursor: none; transition: transform .18s ease, box-shadow .18s ease;
-    display: block; break-inside: avoid; margin-bottom: 20px;
-  }
-  .photo-tile:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow); }
-  .photo-tile img { width: 100%; height: auto; display: block; }
 
   .banner-hero { margin-bottom: 20px; }
   .banner-grid {
@@ -445,7 +441,6 @@
   .app:has(#page-deep:checked) .nav-links label[for="page-video"],
   .app:has(#page-ogc:checked) .nav-links label[for="page-video"],
   .app:has(#page-unswfood:checked) .nav-links label[for="page-video"],
-  .app:has(#page-photo:checked) .nav-links label[for="page-photo"],
   .app:has(#page-graphic:checked) .nav-links label[for="page-graphic"],
   .app:has(#page-resume:checked) .nav-links label[for="page-resume"],
   .app:has(#page-about:checked) .nav-links label[for="page-about"] {
@@ -457,7 +452,7 @@
     position: relative;
     display: grid; grid-template-columns: 1fr; gap: 80px;
     padding: 100px 56px 110px; max-width: var(--content-max); margin: 0 auto;
-    min-height: 82vh; align-content: center;
+    min-height: 55vh; align-content: center;
   }
 
   /* one-time entrance scatter, reuses the ambient sprite shapes */
@@ -475,9 +470,6 @@
     100% { opacity: 0; transform: scale(0.82) rotate(8deg); }
   }
   @media (prefers-reduced-motion: reduce) { .hero-scatter { display: none; } }
-  /* on very wide monitors the reflowed content area alone left everything looking small;
-     scale the whole hero-copy block up beyond ~1900px viewport so it matches how it reads at typical laptop widths */
-  .hero-copy { transform: scale(clamp(1, calc(100vw / 1900px), 1.5)); transform-origin: left center; }
   .hero-copy .kicker { font-family: var(--label-font); font-size: 14px; text-transform: uppercase; letter-spacing: var(--label-tracking); color: var(--accent-2); font-weight: 700; margin: 0 0 18px; }
   .hero-copy .kicker.rotator { min-height: 2.8em; display: flex; align-items: flex-end; }
 
@@ -512,7 +504,7 @@
   }
   .hero-copy h2 { font-family: var(--heading-font); font-weight: 700; text-transform: uppercase; font-size: clamp(40px, 6.25vw, 71px); line-height: 1.06; margin: 0 0 18px; text-wrap: balance; }
   .hero-copy h2 span { color: var(--accent); }
-  .hero-copy p.tagline { color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; max-width: 46ch; margin: 0 0 30px; }
+  .hero-copy p.tagline { color: var(--ink-soft); font-size: 16.5px; line-height: 1.65; max-width: 65ch; margin: 0 0 30px; }
   .hero-copy .flavor { font-family: var(--label-font); font-size: 16px; letter-spacing: 0.04em; color: var(--ink-soft); border-left: 2px solid var(--accent); padding-left: 14px; line-height: 1.7; max-width: 44ch; margin-bottom: 36px; }
   .about-quote { font-family: var(--label-font); font-size: 16px; letter-spacing: 0.04em; color: var(--ink-soft); line-height: 1.7; max-width: 90ch; margin-bottom: 36px; }
 
@@ -662,7 +654,7 @@
   }
   .crown-badge:hover { padding: 7px 14px 7px 7px; background: var(--accent); border-color: var(--accent); }
   .crown-badge:hover .crown-reveal { max-width: 220px; opacity: 1; margin-left: 8px; }
-  .path-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
+  .path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
   .path-tile {
     position: relative; background: var(--surface); border: 2px solid var(--border);
     padding: 22px 12px 16px; text-align: center; overflow: hidden; text-decoration: none;
@@ -684,7 +676,7 @@
     opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease;
   }
   .path-tile:hover .path-arrow { opacity: 1; transform: translateY(0); color: var(--accent); }
-  .path-tile--ux:hover .path-arrow, .path-tile--video:hover .path-arrow, .path-tile--photo:hover .path-arrow, .path-tile--graphic:hover .path-arrow { color: var(--ink); }
+  .path-tile--ux:hover .path-arrow, .path-tile--video:hover .path-arrow, .path-tile--graphic:hover .path-arrow { color: var(--ink); }
 
   /* hover: small stack of real work images replaces the icon, contained within the tile */
   .path-fan { position: absolute; top: 50px; left: 50%; width: 0; height: 0; z-index: 2; pointer-events: none; }
@@ -705,7 +697,6 @@
   /* each discipline's stack sized to that content's own aspect ratio, no cropping mismatch */
   .path-tile--ux .path-fan-card { width: 24px; height: 52px; }
   .path-tile--video .path-fan-card { width: 54px; height: 40px; }
-  .path-tile--photo .path-fan-card { width: 52px; height: 35px; }
   .path-tile--graphic .path-fan-card { width: 54px; height: 32px; }
 
   .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
@@ -824,9 +815,7 @@
     .nav-links li { width: 100%; }
     .nav-links label { display: block; padding: 10px 12px; }
     .nav-links li:last-child { display: none; }
-    .loadout, .case-study-grid, .edu-grid, .video-grid { grid-template-columns: 1fr; }
-    .photo-grid { columns: 2; }
-    .path-grid { grid-template-columns: repeat(2, 1fr); }
+    .loadout, .case-study-grid, .edu-grid, .video-grid, .path-grid { grid-template-columns: 1fr; }
     .media-head { padding: 48px 24px 32px; }
     details.role .role-body { padding-left: 22px; }
     footer.frame-footer { flex-direction: column; gap: 6px; }
@@ -855,7 +844,6 @@
     <input type="radio" name="page" id="page-deep">
     <input type="radio" name="page" id="page-ogc">
     <input type="radio" name="page" id="page-unswfood">
-    <input type="radio" name="page" id="page-photo">
     <input type="radio" name="page" id="page-graphic">
     <input type="radio" name="page" id="page-resume">
     <input type="radio" name="page" id="page-about">
@@ -866,7 +854,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
 
     <section class="hero">
@@ -875,7 +863,7 @@
         <span class="otw-badge"><span class="otw-dot"></span>open to work</span>
         <p class="kicker rotator"><span class="rotator-live"><span class="rotator-text">Multimedia Designer</span></span></p>
         <h2>Hi, I'm <span>Michelle</span> <label for="page-about" class="hero-avatar-inline"><img class="avatar-img" src="assets/images/photo-of-michelle.jpg" alt="Photo of Michelle"></label></h2>
-        <p class="tagline">Product design, UX/UI, videography, photography and graphic design. Thoughtful, user-focused work across every medium.</p>
+        <p class="tagline">I create across UX/UI, videography and graphic design, bringing ideas to life through thoughtful, user-focused work.</p>
       </div>
       <div class="hero-scroll">
         <div class="scroll-indicator is-in">
@@ -938,14 +926,6 @@
           </div>
           <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div><div class="path-label">Videography</div><span class="path-arrow">view →</span>
         </label>
-        <label for="page-photo" class="path-tile pixel path-tile--photo">
-          <div class="path-fan" aria-hidden="true">
-            <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/ski-resort-switzerland.jpg" alt="">
-            <img class="path-fan-card path-fan-card--2" loading="lazy" src="assets/images/pelicans.jpg" alt="">
-            <img class="path-fan-card path-fan-card--3" loading="lazy" src="assets/images/corgi.jpg" alt="">
-          </div>
-          <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/></svg></div><div class="path-label">Photography</div><span class="path-arrow">view →</span>
-        </label>
         <label for="page-graphic" class="path-tile pixel path-tile--graphic">
           <div class="path-fan" aria-hidden="true">
             <img class="path-fan-card path-fan-card--1" loading="lazy" src="assets/images/aram-hurricane-banner.jpg" alt="">
@@ -1001,7 +981,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">UX/UI Design</p>
@@ -1041,7 +1021,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Work</label>
@@ -1173,7 +1153,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Work</label>
@@ -1272,7 +1252,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <h2>Videography</h2>
@@ -1399,7 +1379,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-ux" class="back-link">← Back to UX Work</label>
@@ -1493,7 +1473,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1556,7 +1536,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1624,7 +1604,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1703,7 +1683,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="case-hero">
       <label for="page-video" class="back-link">← Back to Videography</label>
@@ -1767,43 +1747,11 @@
     </footer>
   </div>
 
-  <div class="page-photo">
-    <nav class="site-nav">
-      <label for="page-home" class="logo">MS</label>
-      <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
-    </nav>
-    <div class="media-head">
-      <h2>Photography</h2>
-      <p>Photos taken over the years, shot on a FujiFilm X-S10.</p>
-    </div>
-    <section class="section" style="padding-top:0;">
-      <div class="photo-grid">
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="430" height="391" src="assets/images/walking-down-a-spiral-staircase.jpg" alt="Walking down a spiral staircase"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/ski-resort-switzerland.jpg" alt="Ski resort, Switzerland"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="909" height="614" src="assets/images/riverside-town-at-dusk-switzerland.jpg" alt="Riverside town at dusk, Switzerland"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/lakeside-silhouette.jpg" alt="Lakeside silhouette"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/corgi.jpg" alt="Corgi"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/pelicans.jpg" alt="Pelicans"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/horse-drawn-carriage.jpg" alt="Horse-drawn carriage"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/group-walk-on-the-beach.jpg" alt="Group walk on the beach"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/neon-museum-exhibit.jpg" alt="Neon museum exhibit"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="667" height="1000" src="assets/images/ferris-wheel.jpg" alt="Ferris wheel"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="1000" height="667" src="assets/images/sunset-over-the-lake.jpg" alt="Sunset over the lake"></div>
-        <div class="photo-tile pixel reveal"><img loading="lazy" width="745" height="640" src="assets/images/chocolate-shop-switzerland.jpg" alt="Chocolate shop, Switzerland"></div>
-      </div>
-    </section>
-    <footer class="frame-footer">
-      <a href="https://www.linkedin.com/in/michelle-sunito-a9a075255/" target="_blank" rel="noopener">LinkedIn</a>
-      <span>michellesunito@gmail.com</span>
-    </footer>
-  </div>
-
   <div class="page-graphic">
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <p class="kicker">Graphic Design</p>
@@ -1832,7 +1780,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
     <div class="media-head">
       <h2>About Me</h2>
@@ -1841,7 +1789,7 @@
       <div class="about-grid">
         <div class="about-photo"><img class="about-photo-img" src="" alt="Photo of Michelle"></div>
         <div class="about-bio">
-          <p>Hi, I'm Michelle, a multimedia designer with expertise in UX/UI, videography, graphic design, and photography. With years of experience using Adobe Creative Suite and Figma, I'm eager to join a creative team where I can contribute my skills and help bring compelling projects to life.</p>
+          <p>Hi, I'm Michelle, a multimedia designer with expertise in UX/UI, videography, and graphic design. With years of experience using Adobe Creative Suite and Figma, I'm eager to join a creative team where I can contribute my skills and help bring compelling projects to life.</p>
           <p>I believe the best work happens through strong collaboration and environments that encourage bold creative thinking.</p>
         </div>
       </div>
@@ -1872,7 +1820,7 @@
     <nav class="site-nav">
       <label for="page-home" class="logo">MS</label>
       <label for="mobile-menu-toggle" class="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></label>
-      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-photo">Photography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
+      <ul class="nav-links"><li><label for="page-ux">UX</label></li><li><label for="page-video">Videography</label></li><li><label for="page-graphic">Graphic Design</label></li><li><label for="page-resume">Resume</label></li><li><label for="page-about">About</label></li></ul>
     </nav>
 
     <div class="resume-head">
@@ -2122,7 +2070,7 @@
     var slugToId = {
       'home': 'page-home', 'ux': 'page-ux', 'canopy': 'page-canopy', 'friends-n-family': 'page-friendsnfamily',
       'scheduling-features': 'page-schedulingfeatures', 'videography': 'page-video', 'never-have-i-ever': 'page-neverhaveiever',
-      'deep': 'page-deep', 'ogc-shorts': 'page-ogc', 'unsw-food': 'page-unswfood', 'photography': 'page-photo',
+      'deep': 'page-deep', 'ogc-shorts': 'page-ogc', 'unsw-food': 'page-unswfood',
       'graphic-design': 'page-graphic', 'resume': 'page-resume', 'about': 'page-about'
     };
     var idToSlug = {};
@@ -2211,7 +2159,7 @@
       box.classList.remove('open'); img.src = '';
       video.pause(); video.removeAttribute('src'); video.load();
     }
-    document.querySelectorAll('.banner-tile img, .photo-tile img, .screen-slide img').forEach(function (el) {
+    document.querySelectorAll('.banner-tile img, .screen-slide img').forEach(function (el) {
       el.style.cursor = 'none';
       el.addEventListener('click', function () { open(el); });
     });
@@ -2452,7 +2400,7 @@
   }
 
   var cursorEl = document.getElementById('game-cursor');
-  var hoverSelector = 'a, label, summary, .path-tile, .tag, .banner-tile, .photo-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img, .more-cs-card';
+  var hoverSelector = 'a, label, summary, .path-tile, .tag, .banner-tile, .lightbox-close, .hobby-video-frame, .screen-arrow, .screen-slide img, .more-cs-card';
   window.addEventListener('mousemove', function (e) {
     cursorEl.style.display = 'block';
     cursorEl.style.left = e.clientX + 'px';
