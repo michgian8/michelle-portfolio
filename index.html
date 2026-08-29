@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --content-max: 1650px;
+    --content-max: 1525px;
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -46,9 +46,6 @@
     --label-font: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     --label-tracking: 0.08em;
   }
-  /* media queries (unlike vw inside calc()) read the true device viewport regardless of the .app zoom below,
-     so very wide monitors get a deliberately narrower column instead of edge-to-edge content */
-  @media (min-width: 2200px) { :root { --content-max: 1500px; } }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   html { scroll-behavior: smooth; }
