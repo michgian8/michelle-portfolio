@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --content-max: 1525px;
+    --content-max: 1180px;
     --bg: #F2F2F0;
     --surface: #FFFFFF;
     --ink: #0F0F0E;
@@ -114,7 +114,7 @@
 
   /* on very wide monitors the whole site read as small/sparse; zoom (not transform, so sticky nav still works)
      scales everything together, calibrated so 1621px (a typical laptop width) is the unscaled baseline */
-  .app { position: relative; z-index: 1; zoom: clamp(1, calc(100vw / 1621px), 2); }
+  .app { position: relative; z-index: 1; }
   img {
     background: linear-gradient(100deg, var(--surface) 30%, var(--border) 45%, var(--surface) 60%);
     background-size: 200% 100%; animation: img-shimmer 1.4s ease-in-out infinite;
@@ -401,7 +401,7 @@
   /* ---- nav ---- */
   nav.site-nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 26px 48px;
+    padding: 26px 56px;
     border-bottom: 1px solid var(--border);
     font-family: var(--label-font);
     position: sticky; top: 0; z-index: 50; background: var(--bg);
@@ -696,8 +696,7 @@
   .path-tile--video .path-fan-card { width: 54px; height: 40px; }
   .path-tile--graphic .path-fan-card { width: 54px; height: 32px; }
 
-  .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; max-width: 1100px; margin: 0 auto; }
-  #home-case-studies .section-head { max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 20px; }
   .ux-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
   .ux-grid .card { padding: 22px 24px; display: flex; flex-direction: column; }
   .ux-grid .card-thumb {
@@ -932,40 +931,6 @@
           </div>
           <div class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="12" height="12" rx="1.5"/><circle cx="16" cy="16" r="5"/></svg></div><div class="path-label">Graphic Design</div><span class="path-arrow">view →</span>
         </label>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><span class="index">03</span><h3>Testimonials</h3><span class="rule"></span></div>
-      <div class="quote-carousel reveal">
-        <div class="quote-track">
-          <div class="quote-slide is-active">
-            <blockquote>"Michelle is a talented designer with a real gift for untangling complex problems and turning them into clean, effective solutions. Beyond the work, Michelle is kind, respectful, and a genuine pleasure to collaborate with, the kind of colleague who makes a team better."</blockquote>
-            <cite>Jake Carkeek · Senior Product Manager, Swipejobs</cite>
-          </div>
-          <div class="quote-slide">
-            <blockquote>"Michelle showed great initiative and brought good ideas to our video content. She's a strong team player who collaborates effectively with others."</blockquote>
-            <cite>Damien Cantelo · CEO &amp; Founder, Apollo Secure</cite>
-          </div>
-          <div class="quote-slide">
-            <blockquote>"It was a pleasure working with Michelle. She's a thoughtful and talented designer who brings a strong eye for detail and a genuine curiosity to her work. She's collaborative, open to feedback, and always willing to learn and take on new challenges. It's been great to see her confidence and skills grow."</blockquote>
-            <cite>Sri Vatsavai · Product Designer, Swipejobs</cite>
-          </div>
-          <div class="quote-slide">
-            <blockquote>"Michelle is an incredibly bright designer and picks up complex concepts fast by understanding how to get to the best result for both the business and the user. She was an absolute joy to work with."</blockquote>
-            <cite>Charlie Bucknell · UX/UI Designer, Swipejobs</cite>
-          </div>
-        </div>
-        <div class="screen-carousel-nav">
-          <button type="button" class="screen-arrow quote-prev" aria-label="Previous quote">←</button>
-          <div class="quote-dots">
-            <button type="button" class="quote-dot is-active" data-index="0" aria-label="Quote 1"></button>
-            <button type="button" class="quote-dot" data-index="1" aria-label="Quote 2"></button>
-            <button type="button" class="quote-dot" data-index="2" aria-label="Quote 3"></button>
-            <button type="button" class="quote-dot" data-index="3" aria-label="Quote 4"></button>
-          </div>
-          <button type="button" class="screen-arrow quote-next" aria-label="Next quote">→</button>
-        </div>
       </div>
     </section>
 
